@@ -37,7 +37,14 @@ class AddClientAssets
                 __DIR__.'/../../js/forum/dist/extension.js',
                 __DIR__.'/../../resources/less/categories.less'
             ]);
-            $event->addBootstrapper('flagrow/koseki/main');
+            $event->addBootstrapper('reflar/koseki/main');
+        }
+
+        if ($event->isAdmin()) {
+            $event->addAssets([
+                __DIR__.'/../../js/admin/dist/extension.js'
+            ]);
+            $event->addBootstrapper('reflar/koseki/main');
         }
     }
 
