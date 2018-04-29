@@ -1,3 +1,3 @@
-flagrow-koseki:
+reflar-koseki:
     forum:
         no-discussions: => core.forum.discussion_list.empty_text

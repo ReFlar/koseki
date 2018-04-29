@@ -189,8 +189,8 @@ System.register('flagrow/koseki/main', ['flarum/extend', './pages/CategoryPage']
         }],
         execute: function () {
 
-            app.initializers.add('flagrow-koseki', function (app) {
-                app.routes['flagrow-koseki'] = {
+            app.initializers.add('reflar-koseki', function (app) {
+                app.routes['reflar-koseki'] = {
                     path: '/koseki',
                     component: CategoryPage.component()
                 };
