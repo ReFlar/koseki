@@ -1,0 +1,134 @@
+.Koseki--Categories {
+    .Category {
+        background: transparent;
+        clear: both;
+        width: 100%;
+        height: auto;
+
+        .TagTile-info {
+            position: relative;
+        }
+
+        .Child--Category {
+            display: flex;
+            .Title--Wrapper {
+                flex: 1;
+
+                .Description {
+                    color: @muted-color;
+                }
+            }
+            .LastDiscussion--Wrapper {
+                flex: 1;
+            }
+        }
+    }
+}
+
+.TagTile-info {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: #f4f4f4;
+    color: #aaa;
+    margin-top: 30px;
+    float: left;
+}
+
+.TagTile-title {
+    float: left;
+    width: 600px;
+}
+
+.TagTile-stats {
+    float: left;
+    width: 200px;
+}
+
+.TagTile-last {
+    float: left;
+    width: 200px;
+}
+
+a.TagTile-name {
+    font-size: 14px!important;
+    padding-top: 50px;
+    display: block;
+    text-decoration: none;
+}
+
+.TagChild {
+    clear: both;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.TagChild-meta {
+    float: left;
+    width: 625px;
+    padding-right: 20px;
+}
+
+.TagChild-stats {
+    float: left;
+    width: 190px;
+    padding-top: 7px;
+}
+
+.TagChild-last {
+    float: left;
+    width: 250px;
+}
+
+.TagChild-title {
+    font-weight: bold;
+}
+
+.TagChild-image {
+    border-radius: 4px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 23px;
+    background: #e8ecf3;
+    float: left;
+}
+
+.TagChild-info {
+    float: left;
+    width: 500px;
+    margin-left: 30px;
+}
+
+.TagChild-post {
+    width: 160px;
+    float: left;
+}
+
+.TagChild-discussion {
+    display: block;
+    font-weight: bold;
+}
+
+.TagChild-avatar {
+    width: 60px;
+    float: left;
+}
+
+.TagChild-avatar img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.TagChild-topics,
+.TagChild-posts {
+    display: block;
+}
+
+.Category--Children {
+    font-weight: none!important;
+}
+
