@@ -1,6 +1,6 @@
 "use strict";
 
-System.register("flagrow/koseki/components/ChildTagView", ["flarum/Component"], function (_export, _context) {
+System.register("reflar/koseki/components/ChildTagView", ["flarum/Component"], function (_export, _context) {
     "use strict";
 
     var Component, ChildTagView;
@@ -89,7 +89,7 @@ System.register("flagrow/koseki/components/ChildTagView", ["flarum/Component"], 
 });;
 'use strict';
 
-System.register('flagrow/koseki/components/PrimaryTagView', ['flarum/Component', 'flarum/tags/utils/sortTags', './ChildTagView'], function (_export, _context) {
+System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 'flarum/tags/utils/sortTags', 'reflar/koseki/components/ChildTagView'], function (_export, _context) {
     "use strict";
 
     var Component, sortTags, ChildTagView, PrimaryTagView;
@@ -98,8 +98,8 @@ System.register('flagrow/koseki/components/PrimaryTagView', ['flarum/Component',
             Component = _flarumComponent.default;
         }, function (_flarumTagsUtilsSortTags) {
             sortTags = _flarumTagsUtilsSortTags.default;
-        }, function (_ChildTagView) {
-            ChildTagView = _ChildTagView.default;
+        }, function (_reflarKosekiComponentsChildTagView) {
+            ChildTagView = _reflarKosekiComponentsChildTagView.default;
         }],
         execute: function () {
             PrimaryTagView = function (_Component) {
@@ -177,15 +177,15 @@ System.register('flagrow/koseki/components/PrimaryTagView', ['flarum/Component',
 });;
 'use strict';
 
-System.register('flagrow/koseki/main', ['flarum/extend', './pages/CategoryPage'], function (_export, _context) {
+System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage'], function (_export, _context) {
     "use strict";
 
     var extend, CategoryPage;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
-        }, function (_pagesCategoryPage) {
-            CategoryPage = _pagesCategoryPage.default;
+        }, function (_reflarKosekiPagesCategoryPage) {
+            CategoryPage = _reflarKosekiPagesCategoryPage.default;
         }],
         execute: function () {
 
@@ -200,15 +200,15 @@ System.register('flagrow/koseki/main', ['flarum/extend', './pages/CategoryPage']
 });;
 'use strict';
 
-System.register('flagrow/koseki/pages/CategoryPage', ['flarum/components/Page', './../components/PrimaryTagView', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags'], function (_export, _context) {
     "use strict";
 
     var Page, PrimaryTagView, sortTags, CategoryPage;
     return {
         setters: [function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
-        }, function (_componentsPrimaryTagView) {
-            PrimaryTagView = _componentsPrimaryTagView.default;
+        }, function (_reflarKosekiComponentsPrimaryTagView) {
+            PrimaryTagView = _reflarKosekiComponentsPrimaryTagView.default;
         }, function (_flarumTagsUtilsSortTags) {
             sortTags = _flarumTagsUtilsSortTags.default;
         }],

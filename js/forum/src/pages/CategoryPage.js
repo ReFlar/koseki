@@ -1,5 +1,5 @@
 import Page from 'flarum/components/Page';
-import PrimaryTagView from './../components/PrimaryTagView';
+import PrimaryTagView from 'reflar/koseki/components/PrimaryTagView';
 import sortTags from 'flarum/tags/utils/sortTags';
 
 export default class CategoryPage extends Page
