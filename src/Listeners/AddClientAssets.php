@@ -40,12 +40,12 @@ class AddClientAssets
             $event->addBootstrapper('reflar/koseki/main');
         }
 
-        // if ($event->isAdmin()) {
-        //     $event->addAssets([
-        //         __DIR__.'/../../js/admin/dist/extension.js'
-        //     ]);
-        //     // $event->addBootstrapper('reflar/koseki/main');
-        // }
+        if ($event->isAdmin()) {
+            $event->addAssets([
+                __DIR__.'/../../js/admin/dist/extension.js'
+            ]);
+            $event->addBootstrapper('reflar/koseki/main');
+        }
     }
 
     /**
