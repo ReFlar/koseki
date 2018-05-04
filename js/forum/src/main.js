@@ -10,4 +10,5 @@ app.initializers.add('reflar-koseki', app => {
     };
 
     Tag.prototype.commentsCount = Model.attribute('commentsCount');
+    Tag.prototype.lastUserId = Model.attribute('lastUserId');
 });

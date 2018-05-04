@@ -1,10 +1,14 @@
 import Component from 'flarum/Component';
+import avatar from 'flarum/helpers/avatar';
+import username from 'flarum/helpers/username';
+import humanTime from 'flarum/helpers/humanTime';
 
 export default class ChildTagView extends Component {
     view() {
         const tag = this.props.tag;
         const discussion = tag.lastDiscussion();
-        console.log(tag)
+        const user = app.store.getById('users', tag.lastUserId())
+console.log(discussion);
         return (
             <div className="TagChild">
                 <div className="TagChild-meta">
@@ -21,13 +25,15 @@ export default class ChildTagView extends Component {
                     <span className="TagChild-post">{tag.commentsCount()}  {tag.commentsCount() == 1 ? 'post' : 'posts' } </span>
                 </div>
 
-                <div className="TagChild-last">
-                    <div className="TagChild-avatar"><img src="http://4tabern.com/assets/avatars/jeybwwupsj9gmgstjpg"/></div>
-                    <div className="TagChild-post">
-                        <a href="" className="TagChild-discussion"></a>
-                        by Shahiem, 18 jan 09:05
-                    </div>
-                </div>
+
+                { discussion ?
+                    (<div className="TagChild-last">
+                        <div className="TagChild-avatar">{avatar(user)} {' '}</div>
+                        <div className="TagChild-post">
+                            <a href={app.route.discussion(discussion, discussion.lastPostNumber())} className="TagChild-discussion">{discussion.title()}</a>
+                            by  {username(user)}, {humanTime(discussion.lastTime())}
+                        </div>
+                </div>) : '' }
             </div>
         );
     }

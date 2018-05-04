@@ -1,12 +1,18 @@
-"use strict";
+'use strict';
 
-System.register("reflar/koseki/components/ChildTagView", ["flarum/Component"], function (_export, _context) {
+System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'flarum/helpers/avatar', 'flarum/helpers/username', 'flarum/helpers/humanTime'], function (_export, _context) {
     "use strict";
 
-    var Component, ChildTagView;
+    var Component, avatar, username, humanTime, ChildTagView;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent.default;
+        }, function (_flarumHelpersAvatar) {
+            avatar = _flarumHelpersAvatar.default;
+        }, function (_flarumHelpersUsername) {
+            username = _flarumHelpersUsername.default;
+        }, function (_flarumHelpersHumanTime) {
+            humanTime = _flarumHelpersHumanTime.default;
         }],
         execute: function () {
             ChildTagView = function (_Component) {
@@ -18,75 +24,85 @@ System.register("reflar/koseki/components/ChildTagView", ["flarum/Component"], f
                 }
 
                 babelHelpers.createClass(ChildTagView, [{
-                    key: "view",
+                    key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
                         var discussion = tag.lastDiscussion();
-                        console.log(tag);
+                        var user = app.store.getById('users', tag.lastUserId());
+                        console.log(discussion);
                         return m(
-                            "div",
-                            { className: "TagChild" },
+                            'div',
+                            { className: 'TagChild' },
                             m(
-                                "div",
-                                { className: "TagChild-meta" },
-                                m("div", { className: "TagChild-image" }),
+                                'div',
+                                { className: 'TagChild-meta' },
+                                m('div', { className: 'TagChild-image' }),
                                 m(
-                                    "div",
-                                    { className: "TagChild-info" },
+                                    'div',
+                                    { className: 'TagChild-info' },
                                     m(
-                                        "a",
-                                        { href: app.route('tag', { tags: tag.slug() }), className: "TagChild-title" },
+                                        'a',
+                                        { href: app.route('tag', { tags: tag.slug() }), className: 'TagChild-title' },
                                         tag.name()
                                     ),
                                     m(
-                                        "p",
+                                        'p',
                                         null,
                                         tag.description()
                                     )
                                 )
                             ),
                             m(
-                                "div",
-                                { className: "TagChild-stats" },
+                                'div',
+                                { className: 'TagChild-stats' },
                                 m(
-                                    "span",
-                                    { className: "TagChild-topics" },
+                                    'span',
+                                    { className: 'TagChild-topics' },
                                     tag.discussionsCount(),
-                                    " ",
+                                    ' ',
                                     tag.discussionsCount() == 1 ? 'topic' : 'topics',
-                                    " "
+                                    ' '
                                 ),
                                 m(
-                                    "span",
-                                    { className: "TagChild-post" },
+                                    'span',
+                                    { className: 'TagChild-post' },
                                     tag.commentsCount(),
-                                    "  ",
+                                    '  ',
                                     tag.commentsCount() == 1 ? 'post' : 'posts',
-                                    " "
+                                    ' '
                                 )
                             ),
-                            m(
-                                "div",
-                                { className: "TagChild-last" },
+                            discussion ? m(
+                                'div',
+                                { className: 'TagChild-last' },
                                 m(
-                                    "div",
-                                    { className: "TagChild-avatar" },
-                                    m("img", { src: "http://4tabern.com/assets/avatars/jeybwwupsj9gmgstjpg" })
+                                    'div',
+                                    { className: 'TagChild-avatar' },
+                                    avatar(user),
+                                    ' ',
+                                    ' '
                                 ),
                                 m(
-                                    "div",
-                                    { className: "TagChild-post" },
-                                    m("a", { href: "", className: "TagChild-discussion" }),
-                                    "by Shahiem, 18 jan 09:05"
+                                    'div',
+                                    { className: 'TagChild-post' },
+                                    m(
+                                        'a',
+                                        { href: app.route.discussion(discussion, discussion.lastPostNumber()), className: 'TagChild-discussion' },
+                                        discussion.title()
+                                    ),
+                                    'by  ',
+                                    username(user),
+                                    ', ',
+                                    humanTime(discussion.lastTime())
                                 )
-                            )
+                            ) : ''
                         );
                     }
                 }]);
                 return ChildTagView;
             }(Component);
 
-            _export("default", ChildTagView);
+            _export('default', ChildTagView);
         }
     };
 });;
@@ -203,6 +219,7 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                 };
 
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
+                Tag.prototype.lastUserId = Model.attribute('lastUserId');
             });
         }
     };

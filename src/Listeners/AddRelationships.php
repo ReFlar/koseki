@@ -15,6 +15,7 @@ use Flarum\Api\Controller;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Core\Post;
+use Flarum\Core\User;
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
@@ -60,7 +61,10 @@ class AddRelationships
     public function prepareApiAttributes(PrepareApiAttributes $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
+            $user = User::find($event->model->lastDiscussion->last_user_id);
+
             $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
+            $event->attributes['lastUserId'] = $event->model->lastDiscussion->last_user_id;
         }
     }
 
