@@ -59,7 +59,10 @@ System.register("reflar/koseki/components/ChildTagView", ["flarum/Component"], f
                                 m(
                                     "span",
                                     { className: "TagChild-post" },
-                                    "22 posts"
+                                    tag.commentsCount(),
+                                    "  ",
+                                    tag.commentsCount() == 1 ? 'post' : 'posts',
+                                    " "
                                 )
                             ),
                             m(
@@ -177,15 +180,19 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
 });;
 'use strict';
 
-System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage'], function (_export, _context) {
+System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
     "use strict";
 
-    var extend, CategoryPage;
+    var extend, CategoryPage, Model, Tag;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
         }, function (_reflarKosekiPagesCategoryPage) {
             CategoryPage = _reflarKosekiPagesCategoryPage.default;
+        }, function (_flarumModel) {
+            Model = _flarumModel.default;
+        }, function (_flarumTagsModelsTag) {
+            Tag = _flarumTagsModelsTag.default;
         }],
         execute: function () {
 
@@ -194,6 +201,8 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                     path: '/koseki',
                     component: CategoryPage.component()
                 };
+
+                Tag.prototype.commentsCount = Model.attribute('commentsCount');
             });
         }
     };

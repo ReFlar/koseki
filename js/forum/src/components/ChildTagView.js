@@ -18,7 +18,7 @@ export default class ChildTagView extends Component {
 
                 <div className="TagChild-stats">
                     <span className="TagChild-topics">{tag.discussionsCount()} {tag.discussionsCount() == 1 ? 'topic' : 'topics' } </span>
-                    <span className="TagChild-post">22 posts</span>
+                    <span className="TagChild-post">{tag.commentsCount()}  {tag.commentsCount() == 1 ? 'post' : 'posts' } </span>
                 </div>
 
                 <div className="TagChild-last">
