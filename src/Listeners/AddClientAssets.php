@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of reflar/polls.
+ * This file is part of reflar/koseki.
  *
  * Copyright (c) ReFlar.
  *
@@ -37,6 +37,7 @@ class AddClientAssets
                 __DIR__.'/../../js/forum/dist/extension.js',
                 __DIR__.'/../../resources/less/categories.less'
             ]);
+
             $event->addBootstrapper('reflar/koseki/main');
         }
 
@@ -44,6 +45,7 @@ class AddClientAssets
             $event->addAssets([
                 __DIR__.'/../../js/admin/dist/extension.js'
             ]);
+
             $event->addBootstrapper('reflar/koseki/main');
         }
     }

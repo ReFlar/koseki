@@ -149,7 +149,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                             'div',
                             { className: 'Category TagTile' },
                             m(
-                                'a',
+                                'h4',
                                 { 'class': 'TagTile-name TagTile-category' },
                                 tag.name()
                             ),
@@ -226,10 +226,10 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
 });;
 'use strict';
 
-System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags', 'flarum/components/IndexPage', 'flarum/helpers/listItems'], function (_export, _context) {
     "use strict";
 
-    var Page, PrimaryTagView, sortTags, CategoryPage;
+    var Page, PrimaryTagView, sortTags, IndexPage, listItems, CategoryPage;
     return {
         setters: [function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
@@ -237,6 +237,10 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
             PrimaryTagView = _reflarKosekiComponentsPrimaryTagView.default;
         }, function (_flarumTagsUtilsSortTags) {
             sortTags = _flarumTagsUtilsSortTags.default;
+        }, function (_flarumComponentsIndexPage) {
+            IndexPage = _flarumComponentsIndexPage.default;
+        }, function (_flarumHelpersListItems) {
+            listItems = _flarumHelpersListItems.default;
         }],
         execute: function () {
             CategoryPage = function (_Page) {
@@ -259,9 +263,35 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                 }, {
                     key: 'view',
                     value: function view() {
-                        return m('div', { className: 'TagsPage' }, m('div', { className: 'container' }, m('div', { className: 'TagsPage-content' }, m('div', { className: 'Koseki--Categories TagTiles' }, this.tags.map(function (tag) {
-                            return PrimaryTagView.component({ tag: tag });
-                        })))));
+                        return m(
+                            'div',
+                            { className: 'KosekiPage' },
+                            IndexPage.prototype.hero(),
+                            m(
+                                'div',
+                                { className: 'container' },
+                                m(
+                                    'nav',
+                                    { className: 'KosekiPage-nav IndexPage-nav sideNav', config: IndexPage.prototype.affixSidebar },
+                                    m(
+                                        'ul',
+                                        null,
+                                        listItems(IndexPage.prototype.sidebarItems().toArray())
+                                    )
+                                ),
+                                m(
+                                    'div',
+                                    { className: 'KosekiPage-content' },
+                                    m(
+                                        'div',
+                                        { className: 'KosekiPage--categories TagTiles' },
+                                        this.tags.map(function (tag) {
+                                            return PrimaryTagView.component({ tag: tag });
+                                        })
+                                    )
+                                )
+                            )
+                        );
                     }
                 }]);
                 return CategoryPage;

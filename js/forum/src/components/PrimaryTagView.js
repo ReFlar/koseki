@@ -14,7 +14,7 @@ export default class PrimaryTagView extends Component {
 
         return (
            <div className="Category TagTile">
-                <a class="TagTile-name TagTile-category">{tag.name()}</a>
+                <h4 class="TagTile-name TagTile-category">{tag.name()}</h4>
                 <p>{tag.description()}</p>
 
                 <div className="TagTile-info">

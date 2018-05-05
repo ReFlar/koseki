@@ -1,9 +1,10 @@
 import Page from 'flarum/components/Page';
 import PrimaryTagView from 'reflar/koseki/components/PrimaryTagView';
 import sortTags from 'flarum/tags/utils/sortTags';
+import IndexPage from 'flarum/components/IndexPage';
+import listItems from 'flarum/helpers/listItems';
 
-export default class CategoryPage extends Page
-{
+export default class CategoryPage extends Page {
     init() {
         super.init();
 
@@ -11,14 +12,21 @@ export default class CategoryPage extends Page
     }
 
     view() {
-        return m(
-            'div',
-            {className: 'TagsPage'},
-            m('div', {className: 'container'}, m(
-                'div',
-                {className: 'TagsPage-content'},
-                m('div', {className: 'Koseki--Categories TagTiles'}, this.tags.map(tag => PrimaryTagView.component({tag})))
-            ))
+        return (
+            <div className="KosekiPage">
+                {IndexPage.prototype.hero()}
+                <div className="container">
+                    <nav className="KosekiPage-nav IndexPage-nav sideNav" config={IndexPage.prototype.affixSidebar}>
+                        <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
+                    </nav>
+
+                    <div className="KosekiPage-content">
+                        <div className="KosekiPage--categories TagTiles">
+                            {this.tags.map(tag => PrimaryTagView.component({tag}))}
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
