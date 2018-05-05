@@ -85,8 +85,12 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                         discussion.title()
                                     ),
                                     app.translator.trans('reflar-koseki.forum.by'),
-                                    '  ',
-                                    username(user),
+                                    '\xA0',
+                                    m(
+                                        'a',
+                                        { href: app.route.user(user), config: m.route },
+                                        username(user)
+                                    ),
                                     ', ',
                                     humanTime(discussion.lastTime())
                                 )
