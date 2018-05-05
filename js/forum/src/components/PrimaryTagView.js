@@ -14,7 +14,7 @@ export default class PrimaryTagView extends Component {
 
         return (
            <div className="Category TagTile">
-                <h4 class="TagTile-name TagTile-category">{tag.name()}</h4>
+                <a href={app.route('tag', {tags: tag.slug()})} className="TagTile-name TagTile-category">{tag.name()}</a>
                 <p>{tag.description()}</p>
 
                 <div className="TagTile-info">

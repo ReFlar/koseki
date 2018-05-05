@@ -149,8 +149,8 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                             'div',
                             { className: 'Category TagTile' },
                             m(
-                                'h4',
-                                { 'class': 'TagTile-name TagTile-category' },
+                                'a',
+                                { href: app.route('tag', { tags: tag.slug() }), className: 'TagTile-name TagTile-category' },
                                 tag.name()
                             ),
                             m(
