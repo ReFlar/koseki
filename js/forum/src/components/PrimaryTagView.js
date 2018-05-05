@@ -18,9 +18,9 @@ export default class PrimaryTagView extends Component {
                 <p>{tag.description()}</p>
 
                 <div className="TagTile-info">
-                    <div class="TagTile-title">Forum</div>
-                    <div class="TagTile-stats">Statistics</div>
-                    <div class="TagTile-last">Last Post</div>
+                    <div class="TagTile-title">{app.translator.trans('reflar-koseki.forum.forum')}</div>
+                    <div class="TagTile-stats">{app.translator.trans('reflar-koseki.forum.statistics')}</div>
+                    <div class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</div>
                 </div>
 
                 <div className="Category--Children TagTile-childview">

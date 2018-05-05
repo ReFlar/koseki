@@ -21,8 +21,9 @@ console.log(discussion);
                 </div>
 
                 <div className="TagChild-stats">
-                    <span className="TagChild-topics">{tag.discussionsCount()} {tag.discussionsCount() == 1 ? 'topic' : 'topics' } </span>
-                    <span className="TagChild-post">{tag.commentsCount()}  {tag.commentsCount() == 1 ? 'post' : 'posts' } </span>
+
+                    <span className="TagChild-topics">{app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
+                    <span className="TagChild-posts">{app.translator.transChoice('reflar-koseki.forum.posts', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
                 </div>
 
 
@@ -31,7 +32,7 @@ console.log(discussion);
                         <div className="TagChild-avatar">{avatar(user)} {' '}</div>
                         <div className="TagChild-post">
                             <a href={app.route.discussion(discussion, discussion.lastPostNumber())} className="TagChild-discussion">{discussion.title()}</a>
-                            by  {username(user)}, {humanTime(discussion.lastTime())}
+                            {app.translator.trans('reflar-koseki.forum.by')}  {username(user)}, {humanTime(discussion.lastTime())}
                         </div>
                 </div>) : '' }
             </div>

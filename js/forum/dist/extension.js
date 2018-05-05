@@ -58,18 +58,12 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                 m(
                                     'span',
                                     { className: 'TagChild-topics' },
-                                    tag.discussionsCount(),
-                                    ' ',
-                                    tag.discussionsCount() == 1 ? 'topic' : 'topics',
-                                    ' '
+                                    app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })
                                 ),
                                 m(
                                     'span',
-                                    { className: 'TagChild-post' },
-                                    tag.commentsCount(),
-                                    '  ',
-                                    tag.commentsCount() == 1 ? 'post' : 'posts',
-                                    ' '
+                                    { className: 'TagChild-posts' },
+                                    app.translator.transChoice('reflar-koseki.forum.posts', tag.discussionsCount(), { count: tag.discussionsCount() })
                                 )
                             ),
                             discussion ? m(
@@ -90,7 +84,8 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                         { href: app.route.discussion(discussion, discussion.lastPostNumber()), className: 'TagChild-discussion' },
                                         discussion.title()
                                     ),
-                                    'by  ',
+                                    app.translator.trans('reflar-koseki.forum.by'),
+                                    '  ',
                                     username(user),
                                     ', ',
                                     humanTime(discussion.lastTime())
@@ -164,17 +159,17 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                 m(
                                     'div',
                                     { 'class': 'TagTile-title' },
-                                    'Forum'
+                                    app.translator.trans('reflar-koseki.forum.forum')
                                 ),
                                 m(
                                     'div',
                                     { 'class': 'TagTile-stats' },
-                                    'Statistics'
+                                    app.translator.trans('reflar-koseki.forum.statistics')
                                 ),
                                 m(
                                     'div',
                                     { 'class': 'TagTile-last' },
-                                    'Last Post'
+                                    app.translator.trans('reflar-koseki.forum.last_post')
                                 )
                             ),
                             m(

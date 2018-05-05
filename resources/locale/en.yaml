@@ -1,3 +1,8 @@
 reflar-koseki:
     forum:
-        no-discussions: => core.forum.discussion_list.empty_text
+        by: by
+        forum: Forum
+        last_post: Last Post
+        statistics: statistics
+        topics: 1 topic|{count} topics
+        posts: 1 post|{count} posts
