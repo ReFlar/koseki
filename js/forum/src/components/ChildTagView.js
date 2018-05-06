@@ -8,7 +8,7 @@ export default class ChildTagView extends Component {
         const tag = this.props.tag;
         const discussion = tag.lastDiscussion();
         const user = app.store.getById('users', tag.lastUserId())
-console.log(discussion);
+
         return (
             <div className="TagChild">
                 <div className="TagChild-meta">
@@ -21,9 +21,8 @@ console.log(discussion);
                 </div>
 
                 <div className="TagChild-stats">
-
                     <span className="TagChild-topics">{app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
-                    <span className="TagChild-posts">{app.translator.transChoice('reflar-koseki.forum.posts', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
+                    <span className="TagChild-posts">{app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
                 </div>
 
 

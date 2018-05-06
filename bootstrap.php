@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of reflar/polls.
+ * This file is part of reflar/koseki.
  *
  * Copyright (c) ReFlar.
  *

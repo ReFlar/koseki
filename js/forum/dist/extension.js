@@ -29,7 +29,7 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                         var tag = this.props.tag;
                         var discussion = tag.lastDiscussion();
                         var user = app.store.getById('users', tag.lastUserId());
-                        console.log(discussion);
+                        console.log(tag.commentsCount());
                         return m(
                             'div',
                             { className: 'TagChild' },
@@ -63,7 +63,7 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                 m(
                                     'span',
                                     { className: 'TagChild-posts' },
-                                    app.translator.transChoice('reflar-koseki.forum.posts', tag.discussionsCount(), { count: tag.discussionsCount() })
+                                    app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
                                 )
                             ),
                             discussion ? m(
