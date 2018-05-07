@@ -89,10 +89,16 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                     m(
                                         'a',
                                         { href: app.route.user(user), config: m.route },
-                                        username(user)
+                                        username(user),
+                                        ' ',
+                                        m('i', { 'class': 'fa fa-icon  fa-arrow-circle-right' })
                                     ),
-                                    ', ',
-                                    humanTime(discussion.lastTime())
+                                    m('br', null),
+                                    m(
+                                        'small',
+                                        null,
+                                        humanTime(discussion.lastTime())
+                                    )
                                 )
                             ) : ''
                         );

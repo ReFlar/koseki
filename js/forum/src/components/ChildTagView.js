@@ -32,8 +32,9 @@ export default class ChildTagView extends Component {
                             <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
                             { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
                             <a href={ app.route.user(user) } config={ m.route }>
-                             { username(user) }
-                             </a>, { humanTime(discussion.lastTime()) }
+                                { username(user) } <i class="fa fa-icon  fa-arrow-circle-right"></i>
+                             </a><br/>
+                            <small>{ humanTime(discussion.lastTime()) }</small>
                         </div>
                 </div>) : '' }
             </div>
