@@ -21,20 +21,19 @@ export default class ChildTagView extends Component {
                 </div>
 
                 <div className="TagChild-stats">
-                    <span className="TagChild-topics">{app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
-                    <span className="TagChild-posts">{app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
+                    <span className="TagChild-topics">{ pp.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
+                    <span className="TagChild-posts">{ app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
                 </div>
-
 
                 { discussion ?
                     (<div className="TagChild-last">
-                        <div className="TagChild-avatar">{avatar(user)} {' '}</div>
+                        <div className="TagChild-avatar">{ avatar(user) } {' '}</div>
                         <div className="TagChild-post">
-                            <a href={app.route.discussion(discussion, discussion.lastPostNumber())} className="TagChild-discussion">{discussion.title()}</a>
-                            {app.translator.trans('reflar-koseki.forum.by')}&nbsp;
-                            <a href={app.route.user(user)} config={m.route}>
-                             {username(user)}
-                             </a>, {humanTime(discussion.lastTime())}
+                            <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
+                            { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
+                            <a href={ app.route.user(user) } config={ m.route }>
+                             { username(user) }
+                             </a>, { humanTime(discussion.lastTime()) }
                         </div>
                 </div>) : '' }
             </div>

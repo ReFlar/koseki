@@ -14,13 +14,13 @@ export default class PrimaryTagView extends Component {
 
         return (
            <div className="Category TagTile">
-                <a href={app.route('tag', {tags: tag.slug()})} className="TagTile-name TagTile-category">{tag.name()}</a>
-                <p>{tag.description()}</p>
+                <a href={ app.route('tag', { tags: tag.slug() }) } className="TagTile-name TagTile-category">{ tag.name() }</a>
+                <p>{ tag.description() }</p>
 
                 <div className="TagTile-info">
-                    <div class="TagTile-title">{app.translator.trans('reflar-koseki.forum.forum')}</div>
-                    <div class="TagTile-stats">{app.translator.trans('reflar-koseki.forum.statistics')}</div>
-                    <div class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</div>
+                    <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forum') }</div>
+                    <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
+                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
                 </div>
 
                 <div className="Category--Children TagTile-childview">
