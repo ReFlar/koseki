@@ -21,8 +21,8 @@ export default class ChildTagView extends Component {
                 </div>
 
                 <div className="TagChild-stats">
-                    <span className="TagChild-topics">{ app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
-                    <span className="TagChild-posts">{ app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
+                    <span className="TagChild-topics">{ tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
+                    <span className="TagChild-posts">{ tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
                 </div>
 
                 { discussion ?

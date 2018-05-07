@@ -58,12 +58,12 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                 m(
                                     'span',
                                     { className: 'TagChild-topics' },
-                                    app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })
+                                    tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })
                                 ),
                                 m(
                                     'span',
                                     { className: 'TagChild-posts' },
-                                    app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
+                                    tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
                                 )
                             ),
                             discussion ? m(
