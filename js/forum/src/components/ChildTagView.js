@@ -15,13 +15,13 @@ export default class ChildTagView extends Component {
                     <div className="TagChild-image"></div>
 
                     <div className="TagChild-info">
-                        <a href={app.route('tag', {tags: tag.slug()})} className="TagChild-title">{tag.name()}</a>
+                        <a href={ app.route('tag', { tags: tag.slug() }) } className="TagChild-title">{tag.name()}</a>
                         <p>{tag.description()}</p>
                     </div>
                 </div>
 
                 <div className="TagChild-stats">
-                    <span className="TagChild-topics">{ pp.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
+                    <span className="TagChild-topics">{ app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), {count: tag.discussionsCount()})}</span>
                     <span className="TagChild-posts">{ app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
                 </div>
 

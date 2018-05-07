@@ -29,7 +29,7 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                         var tag = this.props.tag;
                         var discussion = tag.lastDiscussion();
                         var user = app.store.getById('users', tag.lastUserId());
-                        console.log(tag.commentsCount());
+
                         return m(
                             'div',
                             { className: 'TagChild' },
@@ -148,22 +148,16 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                             'div',
                             { className: 'Category TagTile' },
                             m(
-                                'a',
-                                { href: app.route('tag', { tags: tag.slug() }), className: 'TagTile-name TagTile-category' },
-                                tag.name()
-                            ),
-                            m(
-                                'p',
-                                null,
-                                tag.description()
-                            ),
-                            m(
                                 'div',
                                 { className: 'TagTile-info' },
                                 m(
                                     'div',
                                     { 'class': 'TagTile-title' },
-                                    app.translator.trans('reflar-koseki.forum.forum')
+                                    m(
+                                        'a',
+                                        { href: app.route('tag', { tags: tag.slug() }) },
+                                        tag.name()
+                                    )
                                 ),
                                 m(
                                     'div',

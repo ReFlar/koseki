@@ -14,15 +14,15 @@ export default class CategoryPage extends Page {
     view() {
         return (
             <div className="KosekiPage">
-                {IndexPage.prototype.hero()}
+                { IndexPage.prototype.hero() }
                 <div className="container">
-                    <nav className="KosekiPage-nav IndexPage-nav sideNav" config={IndexPage.prototype.affixSidebar}>
-                        <ul>{listItems(IndexPage.prototype.sidebarItems().toArray())}</ul>
+                    <nav className="KosekiPage-nav IndexPage-nav sideNav" config={ IndexPage.prototype.affixSidebar }>
+                        <ul>{ listItems(IndexPage.prototype.sidebarItems().toArray()) }</ul>
                     </nav>
 
                     <div className="KosekiPage-content">
                         <div className="KosekiPage--categories TagTiles">
-                            {this.tags.map(tag => PrimaryTagView.component({tag}))}
+                            { this.tags.map(tag => PrimaryTagView.component({tag})) }
                         </div>
                     </div>
                 </div>
