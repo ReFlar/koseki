@@ -149,13 +149,12 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
-
                         return m(
                             'div',
                             { className: 'Category TagTile' },
                             m(
                                 'div',
-                                { className: 'TagTile-info' },
+                                { className: 'TagTile-info', style: tag.color() ? 'background: ' + tag.color() + ';' : '' },
                                 m(
                                     'div',
                                     { 'class': 'TagTile-title' },
