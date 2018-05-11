@@ -33,8 +33,8 @@
             "title": "ReFlar Koseki",
             "icon": {
                 "name": "th-list",
-                "backgroundColor": "#f4f4f4",
-                "color": "#5f4bb6"
+                "backgroundColor": "#263238",
+                "color": "#FFF"
             }
         },
         "flagrow": {
