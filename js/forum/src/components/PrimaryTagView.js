@@ -7,6 +7,7 @@ export default class PrimaryTagView extends Component {
         super.init();
 
         this.tags = sortTags(app.store.all('tags').filter(tag => tag.parent() == this.props.tag));
+
     }
 
     view() {

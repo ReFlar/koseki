@@ -2,12 +2,15 @@ import Component from 'flarum/Component';
 import avatar from 'flarum/helpers/avatar';
 import username from 'flarum/helpers/username';
 import humanTime from 'flarum/helpers/humanTime';
+import LastDiscussionView from 'reflar/koseki/components/LastDiscussionView';
 
 export default class ChildTagView extends Component {
+    init() {
+        super.init();
+    }
+
     view() {
         const tag = this.props.tag;
-        const discussion = tag.lastDiscussion();
-        const user = app.store.getById('users', tag.lastUserId())
 
         return (
             <div className="TagChild">
@@ -25,19 +28,9 @@ export default class ChildTagView extends Component {
                     <span className="TagChild-posts">{ tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), {count: tag.commentsCount() == 0 ? 0 : tag.commentsCount()})}</span>
                 </div>
 
-                { discussion ?
-                    (<div className="TagChild-last">
-                        <div className="TagChild-avatar">{ avatar(user) } {' '}</div>
-                        <div className="TagChild-post">
-                            <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
-                            { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
-                            <a href={ app.route.user(user) } config={ m.route }>
-                                { username(user) } <i class="fa fa-icon  fa-arrow-circle-right"></i>
-                             </a><br/>
-                            <small>{ humanTime(discussion.lastTime()) }</small>
-                        </div>
-                </div>) : '' }
+                {LastDiscussionView.component({tag})}
             </div>
         );
+
     }
 }

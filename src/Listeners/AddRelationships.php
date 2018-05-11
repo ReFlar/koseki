@@ -64,7 +64,16 @@ class AddRelationships
             $user = User::find($event->model->lastDiscussion->last_user_id);
 
             $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
-            $event->attributes['lastUserId'] = $event->model->lastDiscussion->last_user_id;
+
+            if ($user) {
+                $groups =  $user->groups()->get()->all();
+
+                $event->attributes['lastUser'] = array(
+                    'username' => $user->username,
+                    'avatar_path' => $user->avatar_path,
+                    'color' => isset($groups[0]) ? $groups[0]['color'] : ''
+                );
+            }
         }
     }
 

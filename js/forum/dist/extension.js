@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'flarum/helpers/avatar', 'flarum/helpers/username', 'flarum/helpers/humanTime'], function (_export, _context) {
+System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'flarum/helpers/avatar', 'flarum/helpers/username', 'flarum/helpers/humanTime', 'reflar/koseki/components/LastDiscussionView'], function (_export, _context) {
     "use strict";
 
-    var Component, avatar, username, humanTime, ChildTagView;
+    var Component, avatar, username, humanTime, LastDiscussionView, ChildTagView;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent.default;
@@ -13,6 +13,8 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
             username = _flarumHelpersUsername.default;
         }, function (_flarumHelpersHumanTime) {
             humanTime = _flarumHelpersHumanTime.default;
+        }, function (_reflarKosekiComponentsLastDiscussionView) {
+            LastDiscussionView = _reflarKosekiComponentsLastDiscussionView.default;
         }],
         execute: function () {
             ChildTagView = function (_Component) {
@@ -24,11 +26,14 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                 }
 
                 babelHelpers.createClass(ChildTagView, [{
+                    key: 'init',
+                    value: function init() {
+                        babelHelpers.get(ChildTagView.prototype.__proto__ || Object.getPrototypeOf(ChildTagView.prototype), 'init', this).call(this);
+                    }
+                }, {
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
-                        var discussion = tag.lastDiscussion();
-                        var user = app.store.getById('users', tag.lastUserId());
 
                         return m(
                             'div',
@@ -66,7 +71,74 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                     tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
                                 )
                             ),
-                            discussion ? m(
+                            LastDiscussionView.component({ tag: tag })
+                        );
+                    }
+                }]);
+                return ChildTagView;
+            }(Component);
+
+            _export('default', ChildTagView);
+        }
+    };
+});;
+'use strict';
+
+System.register('reflar/koseki/components/LastDiscussionView', ['flarum/Component', 'flarum/helpers/avatar', 'flarum/helpers/username', 'flarum/helpers/humanTime', 'flarum/utils/stringToColor', 'flarum/utils/computed'], function (_export, _context) {
+    "use strict";
+
+    var Component, avatar, username, humanTime, stringToColor, computed, LastDiscussionView;
+    return {
+        setters: [function (_flarumComponent) {
+            Component = _flarumComponent.default;
+        }, function (_flarumHelpersAvatar) {
+            avatar = _flarumHelpersAvatar.default;
+        }, function (_flarumHelpersUsername) {
+            username = _flarumHelpersUsername.default;
+        }, function (_flarumHelpersHumanTime) {
+            humanTime = _flarumHelpersHumanTime.default;
+        }, function (_flarumUtilsStringToColor) {
+            stringToColor = _flarumUtilsStringToColor.default;
+        }, function (_flarumUtilsComputed) {
+            computed = _flarumUtilsComputed.default;
+        }],
+        execute: function () {
+            LastDiscussionView = function (_Component) {
+                babelHelpers.inherits(LastDiscussionView, _Component);
+
+                function LastDiscussionView() {
+                    babelHelpers.classCallCheck(this, LastDiscussionView);
+                    return babelHelpers.possibleConstructorReturn(this, (LastDiscussionView.__proto__ || Object.getPrototypeOf(LastDiscussionView)).apply(this, arguments));
+                }
+
+                babelHelpers.createClass(LastDiscussionView, [{
+                    key: 'init',
+                    value: function init() {
+                        babelHelpers.get(LastDiscussionView.prototype.__proto__ || Object.getPrototypeOf(LastDiscussionView.prototype), 'init', this).call(this);
+                    }
+                }, {
+                    key: 'view',
+                    value: function view() {
+                        var tag = this.props.tag;
+                        var discussion = tag.lastDiscussion();
+
+                        if (tag.lastUser() != null) {
+                            var user = {
+                                username: m.prop(tag.lastUser().username),
+                                avatarUrl: tag.lastUser().avatar_path != null ? m.prop('assets/avatars/' + tag.lastUser().avatar_path) : m.prop(),
+                                color: computed('username', 'avatarUrl', 'avatarColor', function (username, avatarUrl, avatarColor) {
+                                    if (avatarColor) {
+                                        return 'rgb(' + avatarColor.join(', ') + ')';
+                                    } else if (avatarUrl) {
+                                        this.calculateAvatarColor();
+                                        return '';
+                                    }
+
+                                    return '#' + stringToColor(username);
+                                })
+                            };
+
+                            return m(
                                 'div',
                                 { className: 'TagChild-last' },
                                 m(
@@ -100,14 +172,16 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                                         humanTime(discussion.lastTime())
                                     )
                                 )
-                            ) : ''
-                        );
+                            );
+                        } else {
+                            return m('div', null);
+                        }
                     }
                 }]);
-                return ChildTagView;
+                return LastDiscussionView;
             }(Component);
 
-            _export('default', ChildTagView);
+            _export('default', LastDiscussionView);
         }
     };
 });;
@@ -217,7 +291,7 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                 };
 
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
-                Tag.prototype.lastUserId = Model.attribute('lastUserId');
+                Tag.prototype.lastUser = Model.attribute('lastUser');
             });
         }
     };
