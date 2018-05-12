@@ -4,8 +4,8 @@ import username from 'flarum/helpers/username';
 import humanTime from 'flarum/helpers/humanTime';
 import stringToColor from 'flarum/utils/stringToColor';
 import computed from 'flarum/utils/computed';
-export default class LastDiscussionView extends Component {
 
+export default class LastDiscussionView extends Component {
     init() {
         super.init();
     }

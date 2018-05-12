@@ -226,7 +226,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                         return m(
                             'div',
                             { className: 'Category TagTile' },
-                            m(
+                            tag.isPrimary() && tag.isChild() == false ? m(
                                 'div',
                                 { className: 'TagTile-info', style: tag.color() ? 'background: ' + tag.color() + ';' : '' },
                                 m(
@@ -248,7 +248,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                     { 'class': 'TagTile-last' },
                                     app.translator.trans('reflar-koseki.forum.last_post')
                                 )
-                            ),
+                            ) : '',
                             m(
                                 'div',
                                 { className: 'Category--Children TagTile-childview' },
@@ -298,10 +298,10 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
 });;
 'use strict';
 
-System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags', 'flarum/components/IndexPage', 'flarum/helpers/listItems'], function (_export, _context) {
+System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'reflar/koseki/components/ChildTagView'], function (_export, _context) {
     "use strict";
 
-    var Page, PrimaryTagView, sortTags, IndexPage, listItems, CategoryPage;
+    var Page, PrimaryTagView, sortTags, IndexPage, listItems, ChildTagView, CategoryPage;
     return {
         setters: [function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
@@ -313,6 +313,8 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
             IndexPage = _flarumComponentsIndexPage.default;
         }, function (_flarumHelpersListItems) {
             listItems = _flarumHelpersListItems.default;
+        }, function (_reflarKosekiComponentsChildTagView) {
+            ChildTagView = _reflarKosekiComponentsChildTagView.default;
         }],
         execute: function () {
             CategoryPage = function (_Page) {
@@ -329,7 +331,10 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                         babelHelpers.get(CategoryPage.prototype.__proto__ || Object.getPrototypeOf(CategoryPage.prototype), 'init', this).call(this);
 
                         this.tags = sortTags(app.store.all('tags').filter(function (tag) {
-                            return tag.isPrimary();
+                            return tag.isChild() == false;
+                        }));
+                        this.secondary = sortTags(app.store.all('tags').filter(function (tag) {
+                            return tag.isChild() == false && tag.isPrimary() == false;
                         }));
                     }
                 }, {
@@ -359,6 +364,28 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                         { className: 'KosekiPage--categories TagTiles' },
                                         this.tags.map(function (tag) {
                                             return PrimaryTagView.component({ tag: tag });
+                                        }),
+                                        this.secondary.length >= 1 ? m(
+                                            'div',
+                                            { className: 'TagTile-info' },
+                                            m(
+                                                'div',
+                                                { 'class': 'TagTile-title' },
+                                                'Forums'
+                                            ),
+                                            m(
+                                                'div',
+                                                { 'class': 'TagTile-stats' },
+                                                app.translator.trans('reflar-koseki.forum.statistics')
+                                            ),
+                                            m(
+                                                'div',
+                                                { 'class': 'TagTile-last' },
+                                                app.translator.trans('reflar-koseki.forum.last_post')
+                                            )
+                                        ) : '',
+                                        this.secondary.map(function (tag) {
+                                            return ChildTagView.component({ tag: tag });
                                         })
                                     )
                                 )

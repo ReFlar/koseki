@@ -31,6 +31,5 @@ export default class ChildTagView extends Component {
                 {LastDiscussionView.component({tag})}
             </div>
         );
-
     }
 }

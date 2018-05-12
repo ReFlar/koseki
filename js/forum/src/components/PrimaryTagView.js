@@ -14,11 +14,12 @@ export default class PrimaryTagView extends Component {
         const tag = this.props.tag;
         return (
            <div className="Category TagTile">
+                { tag.isPrimary() && tag.isChild() == false ? (
                 <div className="TagTile-info" style={tag.color() ? 'background: ' + tag.color() + ';' : ''}>
                     <div class="TagTile-title"><a href={ app.route('tag', { tags: tag.slug() }) }>{ tag.name() }</a></div>
                     <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
                     <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
-                </div>
+                </div>) : ''}
 
                 <div className="Category--Children TagTile-childview">
                     { this.tags.map(tag => ChildTagView.component({tag})) }
