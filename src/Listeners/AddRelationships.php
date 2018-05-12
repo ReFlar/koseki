@@ -72,7 +72,7 @@ class AddRelationships
 
                 $event->attributes['lastUser'] = array(
                     'username' => $user->username,
-                    'avatar_path' => $user->avatar_path,
+                    'avatarUrl' => $user->avatarUrl,
                     'color' => isset($groups[0]) ? $groups[0]['color'] : ''
                 );
             }

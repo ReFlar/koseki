@@ -17,7 +17,7 @@ export default class LastDiscussionView extends Component {
         if (tag.lastUser() != null) {
             let user = {
                 username: m.prop(tag.lastUser().username),
-                avatarUrl:  tag.lastUser().avatar_path != null ? m.prop('assets/avatars/' + tag.lastUser().avatar_path) : m.prop(),
+                avatarUrl: tag.lastUser().avatarUrl != null ? m.prop(tag.lastUser().avatarUrl) : m.prop(),
                 color: computed('username', 'avatarUrl', 'avatarColor', function(username, avatarUrl, avatarColor) {
                     if (avatarColor) {
                       return 'rgb(' + avatarColor.join(', ') + ')';
