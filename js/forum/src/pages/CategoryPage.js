@@ -10,10 +10,12 @@ export default class CategoryPage extends Page {
         super.init();
 
         this.tags = sortTags(app.store.all('tags').filter(tag => tag.isChild() == false));
-        this.secondary = sortTags(app.store.all('tags').filter(tag => tag.isChild() == false && tag.isPrimary() == false));
+        this.secondary = sortTags(app.store.all('tags').filter(tag => tag.hasChild() == false && tag.isChild() == false));
     }
 
     view() {
+        console.log(this.tags);
+
         return (
             <div className="KosekiPage">
                 { IndexPage.prototype.hero() }

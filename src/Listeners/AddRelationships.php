@@ -40,9 +40,7 @@ class AddRelationships
      */
     public function getModelRelationship(GetModelRelationship $event)
     {
-        if ($event->isRelationship(Tag::class, 'Poll')) {
-            return $event->model->hasOne(Question::class, 'discussion_id', 'id', null, 'end_date', 'Poll');
-        }
+
     }
 
     /**
@@ -64,11 +62,12 @@ class AddRelationships
             $lastDiscussion = $event->model->lastDiscussion;
             $user = isset($lastDiscussion->last_user_id) ? User::find($lastDiscussion->last_user_id) : null;
 
-            $event->attributes['discussionsCount'] = count($event->model->discussions);;
+            $event->attributes['hasChild'] = $event->model->where('parent_id', $event->model->id)->count() >= 1 ? true : false;
+            $event->attributes['discussionsCount'] = count($event->model->discussions);
             $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
 
             if ($user) {
-                $groups =  $user->groups()->get()->all();
+                $groups = $user->groups()->get()->all();
 
                 $event->attributes['lastUser'] = array(
                     'username' => $user->username,

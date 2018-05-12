@@ -223,10 +223,11 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
+
                         return m(
                             'div',
                             { className: 'Category TagTile' },
-                            tag.isPrimary() && tag.isChild() == false ? m(
+                            tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
                                 'div',
                                 { className: 'TagTile-info', style: tag.color() ? 'background: ' + tag.color() + ';' : '' },
                                 m(
@@ -252,6 +253,11 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                             m(
                                 'div',
                                 { className: 'Category--Children TagTile-childview' },
+                                tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
+                                    'div',
+                                    { 'class': 'TagTile-description' },
+                                    tag.description()
+                                ) : '',
                                 this.tags.map(function (tag) {
                                     return ChildTagView.component({ tag: tag });
                                 })
@@ -292,6 +298,7 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
 
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
                 Tag.prototype.lastUser = Model.attribute('lastUser');
+                Tag.prototype.hasChild = Model.attribute('hasChild');
             });
         }
     };
@@ -334,12 +341,14 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                             return tag.isChild() == false;
                         }));
                         this.secondary = sortTags(app.store.all('tags').filter(function (tag) {
-                            return tag.isChild() == false && tag.isPrimary() == false;
+                            return tag.hasChild() == false && tag.isChild() == false;
                         }));
                     }
                 }, {
                     key: 'view',
                     value: function view() {
+                        console.log(this.tags);
+
                         return m(
                             'div',
                             { className: 'KosekiPage' },
