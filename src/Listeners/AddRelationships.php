@@ -61,8 +61,10 @@ class AddRelationships
     public function prepareApiAttributes(PrepareApiAttributes $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
-            $user = User::find($event->model->lastDiscussion->last_user_id);
+            $lastDiscussion = $event->model->lastDiscussion;
+            $user = isset($lastDiscussion->last_user_id) ? User::find($lastDiscussion->last_user_id) : null;
 
+            $event->attributes['discussionsCount'] = count($event->model->discussions);;
             $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
 
             if ($user) {

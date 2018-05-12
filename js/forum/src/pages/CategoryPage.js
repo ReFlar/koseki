@@ -15,6 +15,7 @@ export default class CategoryPage extends Page {
         return (
             <div className="KosekiPage">
                 { IndexPage.prototype.hero() }
+
                 <div className="container">
                     <nav className="KosekiPage-nav IndexPage-nav sideNav" config={ IndexPage.prototype.affixSidebar }>
                         <ul>{ listItems(IndexPage.prototype.sidebarItems().toArray()) }</ul>
