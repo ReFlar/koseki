@@ -9,22 +9,19 @@
  * For the full copyright and license information, please view the license.md
  * file that was distributed with this source code.
  */
+
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Api\Controller;
-use Flarum\Api\Serializer\ForumSerializer;
-use Flarum\Tags\Api\Serializer\TagSerializer;
-use Flarum\Core\Post;
 use Flarum\Core\User;
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\PrepareApiAttributes;
+use Flarum\Tags\Api\Serializer\TagSerializer;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddRelationships
 {
-
     public function subscribe(Dispatcher $events)
     {
         $events->listen(GetModelRelationship::class, [$this, 'getModelRelationship']);
@@ -40,7 +37,6 @@ class AddRelationships
      */
     public function getModelRelationship(GetModelRelationship $event)
     {
-
     }
 
     /**
@@ -50,7 +46,6 @@ class AddRelationships
      */
     public function getApiRelationship(GetApiRelationship $event)
     {
-
     }
 
     /**
@@ -69,11 +64,11 @@ class AddRelationships
             if ($user) {
                 $groups = $user->groups()->get()->all();
 
-                $event->attributes['lastUser'] = array(
-                    'username' => $user->username,
+                $event->attributes['lastUser'] = [
+                    'username'  => $user->username,
                     'avatarUrl' => $user->avatarUrl,
-                    'color' => isset($groups[0]) ? $groups[0]['color'] : ''
-                );
+                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
+                ];
             }
         }
     }
@@ -83,6 +78,5 @@ class AddRelationships
      */
     public function includeRelationship(ConfigureApiController $event)
     {
-
     }
 }
