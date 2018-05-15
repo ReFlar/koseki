@@ -27,6 +27,10 @@
         width: 630px;
     }
 
+    .TagTile-title a {
+        color: #aaa;
+    }
+
     .TagTile-stats {
         float: left;
         width: 140px;
@@ -121,6 +125,12 @@
         border-radius: 50%;
     }
 
+    .TagChild-avatar span.Avatar {
+        width: 40px;
+        height: 40px;
+        line-height: 39px;
+    }
+
     .TagChild-topics,
     .TagChild-posts {
         display: block;
@@ -169,15 +179,46 @@
 }
 
 /* Mobile / Tablet */
-@media only screen and (max-width: 769px) {
+@media only screen and (min-width: 700px) and (max-width: 769px) {
     .KosekiPage .TagTile-title {
-        width: 300px;
+        width: 330px;
+    }
+
+    .KosekiPage .TagChild-meta {
+        width: 350px;
+    }
+
+    .KosekiPage .TagChild-stats {
+        width: 140px;
+    }
+
+    .KosekiPage .TagChild-info {
+        width: 200px;
     }
   }
 
 @media only screen and (max-width: 500px) {
-    .PollOption {
-      width: 100%;
-      margin-right: 0;
+    .KosekiPage .TagChild-last, .KosekiPage .TagChild-stats {
+        display: none;
+    }
+
+    .TagTile-stats, .TagTile-last {
+        display: none;
+    }
+
+    .KosekiPage .TagChild-info {
+        width: 80%;
+        margin-left: 10px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    .KosekiPage .TagChild-meta {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .KosekiPage--categories.TagTiles {
+        margin: 0;
     }
   }

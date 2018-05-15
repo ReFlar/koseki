@@ -347,8 +347,6 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                 }, {
                     key: 'view',
                     value: function view() {
-                        console.log(this.tags);
-
                         return m(
                             'div',
                             { className: 'KosekiPage' },

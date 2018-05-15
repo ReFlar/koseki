@@ -14,8 +14,6 @@ export default class CategoryPage extends Page {
     }
 
     view() {
-        console.log(this.tags);
-
         return (
             <div className="KosekiPage">
                 { IndexPage.prototype.hero() }
