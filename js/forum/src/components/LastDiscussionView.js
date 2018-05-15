@@ -33,12 +33,13 @@ export default class LastDiscussionView extends Component {
             return (
                 <div className="TagChild-last">
                     <div className="TagChild-avatar">{ avatar(user) } {' '}</div>
-                        <div className="TagChild-post">
-                            <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
-                            { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
-                            <a href={ app.route.user(user) } config={ m.route }>
-                                { username(user) } <i class="fa fa-icon  fa-arrow-circle-right"></i>
-                            </a><br/>
+                    <div className="TagChild-post">
+                        <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
+                        { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
+
+                        <a href={ app.route.user(user) } config={ m.route }>
+                            { username(user) } <i class="fa fa-icon fa-arrow-circle-right"></i>
+                         </a><br/>
                         <small>{ humanTime(discussion.lastTime()) }</small>
                     </div>
                 </div>

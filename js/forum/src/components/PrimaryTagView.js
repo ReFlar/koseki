@@ -22,7 +22,7 @@ export default class PrimaryTagView extends Component {
                 </div>) : ''}
 
                 <div className="Category--Children TagTile-childview">
-                    { tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? (<div class="TagTile-description">{ tag.description() }</div>) : ''}
+                    { tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? (<div class="TagTile-description">{ tag.description() }</div>) : ''}
                     { this.tags.map(tag => ChildTagView.component({tag})) }
                 </div>
            </div>

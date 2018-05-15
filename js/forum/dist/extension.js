@@ -163,7 +163,7 @@ System.register('reflar/koseki/components/LastDiscussionView', ['flarum/Componen
                                         { href: app.route.user(user), config: m.route },
                                         username(user),
                                         ' ',
-                                        m('i', { 'class': 'fa fa-icon  fa-arrow-circle-right' })
+                                        m('i', { 'class': 'fa fa-icon fa-arrow-circle-right' })
                                     ),
                                     m('br', null),
                                     m(
@@ -253,7 +253,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                             m(
                                 'div',
                                 { className: 'Category--Children TagTile-childview' },
-                                tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
+                                tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? m(
                                     'div',
                                     { 'class': 'TagTile-description' },
                                     tag.description()
@@ -380,7 +380,7 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                             m(
                                                 'div',
                                                 { 'class': 'TagTile-title' },
-                                                'Forums'
+                                                app.translator.trans('reflar-koseki.forum.forums')
                                             ),
                                             m(
                                                 'div',
