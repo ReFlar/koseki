@@ -31,7 +31,7 @@ export default class CategoryPage extends Page {
 
                             { this.secondary.length >= 1 ? (
                             <div className="TagTile-info">
-                                <div class="TagTile-title">Forums</div>
+                                <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forums') }</div>
                                 <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
                                 <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
                             </div>) : ''}
