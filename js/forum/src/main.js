@@ -13,14 +13,4 @@ app.initializers.add('reflar-koseki', app => {
     Tag.prototype.commentsCount = Model.attribute('commentsCount');
     Tag.prototype.lastUser = Model.attribute('lastUser');
     Tag.prototype.hasChild = Model.attribute('hasChild');
-
-    extend(IndexPage.prototype, 'view', function(vdom) {
-        // vdom.children[1].children[0].remove();
-
-        // if (typeof vdom.children[1].children[0] != 'undifined') {
-        //     delete vdom.children[1].children[0];
-        // }
-
-        console.log(vdom.children[1].children[0]);
-      });
 });

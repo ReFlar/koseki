@@ -9,6 +9,13 @@ export default class PrimaryTagView extends Component {
         this.tags = sortTags(app.store.all('tags').filter(tag => tag.parent() == this.props.tag));
     }
 
+    toggleView() {
+        let parent = this.parentNode.parentNode.parentNode;
+        let child = parent.querySelectorAll('.Category--Children')[0];
+
+        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+    }
+
     view() {
         const tag = this.props.tag;
 
@@ -18,7 +25,8 @@ export default class PrimaryTagView extends Component {
                 <div className="TagTile-info" style={tag.color() ? 'background: ' + tag.color() + ';' : ''}>
                     <div class="TagTile-title"><a href={ app.route('tag', { tags: tag.slug() }) }>{ tag.name() }</a></div>
                     <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
-                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
+                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }
+                    <i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
                 </div>) : ''}
 
                 <div className="Category--Children TagTile-childview">

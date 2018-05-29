@@ -220,6 +220,14 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                         }));
                     }
                 }, {
+                    key: 'toggleView',
+                    value: function toggleView() {
+                        var parent = this.parentNode.parentNode.parentNode;
+                        var child = parent.querySelectorAll('.Category--Children')[0];
+
+                        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                    }
+                }, {
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
@@ -247,7 +255,8 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                 m(
                                     'div',
                                     { 'class': 'TagTile-last' },
-                                    app.translator.trans('reflar-koseki.forum.last_post')
+                                    app.translator.trans('reflar-koseki.forum.last_post'),
+                                    m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
                                 )
                             ) : '',
                             m(
@@ -301,16 +310,6 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
                 Tag.prototype.lastUser = Model.attribute('lastUser');
                 Tag.prototype.hasChild = Model.attribute('hasChild');
-
-                extend(IndexPage.prototype, 'view', function (vdom) {
-                    // vdom.children[1].children[0].remove();
-
-                    // if (typeof vdom.children[1].children[0] != 'undifined') {
-                    //     delete vdom.children[1].children[0];
-                    // }
-
-                    console.log(vdom.children[1].children[0]);
-                });
             });
         }
     };

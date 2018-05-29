@@ -13,6 +13,7 @@ export default class CategoryPage extends Page {
         this.secondary = sortTags(app.store.all('tags').filter(tag => tag.hasChild() == false && tag.isChild() == false));
     }
 
+
     view() {
         return (
             <div className="KosekiPage">
@@ -31,7 +32,8 @@ export default class CategoryPage extends Page {
                             <div className="TagTile-info">
                                 <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forums') }</div>
                                 <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
-                                <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
+                                <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }
+                                </div>
                             </div>) : ''}
 
                              { this.secondary.map(tag => ChildTagView.component({tag})) }
