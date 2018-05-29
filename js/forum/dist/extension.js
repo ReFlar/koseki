@@ -274,15 +274,17 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
 });;
 'use strict';
 
-System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
+System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage', 'flarum/components/IndexPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
     "use strict";
 
-    var extend, CategoryPage, Model, Tag;
+    var extend, CategoryPage, IndexPage, Model, Tag;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
         }, function (_reflarKosekiPagesCategoryPage) {
             CategoryPage = _reflarKosekiPagesCategoryPage.default;
+        }, function (_flarumComponentsIndexPage) {
+            IndexPage = _flarumComponentsIndexPage.default;
         }, function (_flarumModel) {
             Model = _flarumModel.default;
         }, function (_flarumTagsModelsTag) {
@@ -299,6 +301,16 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
                 Tag.prototype.lastUser = Model.attribute('lastUser');
                 Tag.prototype.hasChild = Model.attribute('hasChild');
+
+                extend(IndexPage.prototype, 'view', function (vdom) {
+                    // vdom.children[1].children[0].remove();
+
+                    // if (typeof vdom.children[1].children[0] != 'undifined') {
+                    //     delete vdom.children[1].children[0];
+                    // }
+
+                    console.log(vdom.children[1].children[0]);
+                });
             });
         }
     };
