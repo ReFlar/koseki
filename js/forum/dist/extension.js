@@ -356,6 +356,14 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                         }));
                     }
                 }, {
+                    key: 'toggleView',
+                    value: function toggleView() {
+                        var parent = this.parentNode.parentNode.parentNode;
+                        var child = parent.querySelectorAll('.Category--Children')[0];
+
+                        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                    }
+                }, {
                     key: 'view',
                     value: function view() {
                         return m(
@@ -385,26 +393,35 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                         }),
                                         this.secondary.length >= 1 ? m(
                                             'div',
-                                            { className: 'TagTile-info' },
+                                            { className: 'Category TagTile' },
                                             m(
                                                 'div',
-                                                { 'class': 'TagTile-title' },
-                                                app.translator.trans('reflar-koseki.forum.forums')
+                                                { className: 'TagTile-info' },
+                                                m(
+                                                    'div',
+                                                    { 'class': 'TagTile-title' },
+                                                    app.translator.trans('reflar-koseki.forum.forums')
+                                                ),
+                                                m(
+                                                    'div',
+                                                    { 'class': 'TagTile-stats' },
+                                                    app.translator.trans('reflar-koseki.forum.statistics')
+                                                ),
+                                                m(
+                                                    'div',
+                                                    { 'class': 'TagTile-last' },
+                                                    app.translator.trans('reflar-koseki.forum.last_post'),
+                                                    m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
+                                                )
                                             ),
                                             m(
                                                 'div',
-                                                { 'class': 'TagTile-stats' },
-                                                app.translator.trans('reflar-koseki.forum.statistics')
-                                            ),
-                                            m(
-                                                'div',
-                                                { 'class': 'TagTile-last' },
-                                                app.translator.trans('reflar-koseki.forum.last_post')
+                                                { className: 'Category--Children TagTile-childview' },
+                                                this.secondary.map(function (tag) {
+                                                    return ChildTagView.component({ tag: tag });
+                                                })
                                             )
-                                        ) : '',
-                                        this.secondary.map(function (tag) {
-                                            return ChildTagView.component({ tag: tag });
-                                        })
+                                        ) : ''
                                     )
                                 )
                             )

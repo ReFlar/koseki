@@ -13,6 +13,12 @@ export default class CategoryPage extends Page {
         this.secondary = sortTags(app.store.all('tags').filter(tag => tag.hasChild() == false && tag.isChild() == false));
     }
 
+    toggleView() {
+        let parent = this.parentNode.parentNode.parentNode;
+        let child = parent.querySelectorAll('.Category--Children')[0];
+
+        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+    }
 
     view() {
         return (
@@ -29,14 +35,22 @@ export default class CategoryPage extends Page {
                             { this.tags.map(tag => PrimaryTagView.component({tag})) }
 
                             { this.secondary.length >= 1 ? (
-                            <div className="TagTile-info">
-                                <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forums') }</div>
-                                <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
-                                <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }
-                                </div>
-                            </div>) : ''}
+                            <div className="Category TagTile">
+                                <div className="TagTile-info">
+                                    <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forums') }</div>
+                                    <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
+                                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }
+                                    <i class="icon fa fa-angle-down" onclick={this.toggleView}></i>
 
-                             { this.secondary.map(tag => ChildTagView.component({tag})) }
+                                    </div>
+                                </div>
+
+                                <div className="Category--Children TagTile-childview">
+                                    { this.secondary.map(tag => ChildTagView.component({tag})) }
+                                </div>
+                            </div>
+                            ) : ''}
+
                         </div>
                     </div>
                 </div>
