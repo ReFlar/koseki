@@ -39,10 +39,8 @@ export default class CategoryPage extends Page {
                                 <div className="TagTile-info">
                                     <div class="TagTile-title">{ app.translator.trans('reflar-koseki.forum.forums') }</div>
                                     <div class="TagTile-stats">{ app.translator.trans('reflar-koseki.forum.statistics') }</div>
-                                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }
-                                    <i class="icon fa fa-angle-down" onclick={this.toggleView}></i>
-
-                                    </div>
+                                    <div class="TagTile-last">{ app.translator.trans('reflar-koseki.forum.last_post') }</div>
+                                    <div class="TagTile-toggle"><i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
                                 </div>
 
                                 <div className="Category--Children TagTile-childview">

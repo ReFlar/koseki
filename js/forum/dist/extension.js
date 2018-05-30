@@ -255,7 +255,11 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                 m(
                                     'div',
                                     { 'class': 'TagTile-last' },
-                                    app.translator.trans('reflar-koseki.forum.last_post'),
+                                    app.translator.trans('reflar-koseki.forum.last_post')
+                                ),
+                                m(
+                                    'div',
+                                    { 'class': 'TagTile-toggle' },
                                     m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
                                 )
                             ) : '',
@@ -410,7 +414,11 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                                 m(
                                                     'div',
                                                     { 'class': 'TagTile-last' },
-                                                    app.translator.trans('reflar-koseki.forum.last_post'),
+                                                    app.translator.trans('reflar-koseki.forum.last_post')
+                                                ),
+                                                m(
+                                                    'div',
+                                                    { 'class': 'TagTile-toggle' },
                                                     m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
                                                 )
                                             ),
