@@ -161,9 +161,7 @@ System.register('reflar/koseki/components/LastDiscussionView', ['flarum/Componen
                                     m(
                                         'a',
                                         { href: app.route.user(user), config: m.route },
-                                        username(user),
-                                        ' ',
-                                        m('i', { 'class': 'fa fa-icon fa-arrow-circle-right' })
+                                        username(user)
                                     ),
                                     m('br', null),
                                     m(

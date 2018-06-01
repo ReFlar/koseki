@@ -38,7 +38,7 @@ export default class LastDiscussionView extends Component {
                         { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
 
                         <a href={ app.route.user(user) } config={ m.route }>
-                            { username(user) } <i class="fa fa-icon fa-arrow-circle-right"></i>
+                            { username(user) }
                          </a><br/>
                         <small>{ humanTime(discussion.lastTime()) }</small>
                     </div>
