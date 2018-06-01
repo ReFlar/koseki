@@ -225,6 +225,14 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                         var parent = this.parentNode.parentNode.parentNode;
                         var child = parent.querySelectorAll('.Category--Children')[0];
 
+                        if (child.style.display == 'none') {
+                            this.classList.remove('fa-angle-left');
+                            this.classList.add('fa-angle-down');
+                        } else {
+                            this.classList.remove('fa-angle-down');
+                            this.classList.add('fa-angle-left');
+                        }
+
                         child.style.display = child.style.display == 'none' ? 'block' : 'none';
                     }
                 }, {
@@ -364,6 +372,14 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                     value: function toggleView() {
                         var parent = this.parentNode.parentNode.parentNode;
                         var child = parent.querySelectorAll('.Category--Children')[0];
+
+                        if (child.style.display == 'none') {
+                            this.classList.remove('fa-angle-left');
+                            this.classList.add('fa-angle-down');
+                        } else {
+                            this.classList.remove('fa-angle-down');
+                            this.classList.add('fa-angle-left');
+                        }
 
                         child.style.display = child.style.display == 'none' ? 'block' : 'none';
                     }

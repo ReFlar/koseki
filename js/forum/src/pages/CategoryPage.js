@@ -17,6 +17,15 @@ export default class CategoryPage extends Page {
         let parent = this.parentNode.parentNode.parentNode;
         let child = parent.querySelectorAll('.Category--Children')[0];
 
+        if (child.style.display == 'none') {
+            this.classList.remove('fa-angle-left');
+            this.classList.add('fa-angle-down');
+
+        } else {
+            this.classList.remove('fa-angle-down');
+            this.classList.add('fa-angle-left');
+        }
+
         child.style.display = child.style.display == 'none' ? 'block' : 'none';
     }
 
