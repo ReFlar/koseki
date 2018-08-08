@@ -60,6 +60,7 @@ class AddRelationships
             $event->attributes['hasChild'] = $event->model->where('parent_id', $event->model->id)->count() >= 1 ? true : false;
             $event->attributes['discussionsCount'] = count($event->model->discussions);
             $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
+            $event->attributes['icon'] = $event->model->icon;
 
             if ($user) {
                 $groups = $user->groups()->get()->all();
@@ -67,7 +68,7 @@ class AddRelationships
                 $event->attributes['lastUser'] = [
                     'username'  => $user->username,
                     'avatarUrl' => $user->avatarUrl,
-                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
+                    'color' => isset($groups[0]) ? $groups[0]['color'] : '',
                 ];
             }
         }
