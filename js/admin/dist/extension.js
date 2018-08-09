@@ -48,12 +48,23 @@ System.register('reflar/koseki/main', ['flarum/extend', 'flarum/Model', 'reflar/
 
                 Tag.prototype.icon = Model.attribute('icon');
 
-                extend(EditTagModal.prototype, 'content', function (content) {
+                extend(EditTagModal.prototype, 'init', function () {
                     this.icon = m.prop(this.tag.icon() || '');
+                });
+
+                extend(EditTagModal.prototype, 'content', function (content) {
+                    var self = this;
+
                     // Add new input
                     var newInput = document.createElement('div');
                     newInput.classList += 'Form-group';
                     newInput.innerHTML = '<label>Icon</label> <input class="FormControl" value="' + this.icon() + '">';
+
+                    // Update input value
+                    var formInput = newInput.querySelector('input');
+                    formInput.oninput = function () {
+                        self.icon = m.prop(formInput.value);
+                    };
 
                     if (this.element) {
                         var formGroups = this.element.getElementsByClassName('Form-group');
@@ -64,7 +75,7 @@ System.register('reflar/koseki/main', ['flarum/extend', 'flarum/Model', 'reflar/
                 });
 
                 extend(EditTagModal.prototype, 'submitData', function (data) {
-                    data.icon = this.icon();
+                    data.icon = this.icon;
                 });
             });
         }
