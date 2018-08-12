@@ -18,12 +18,12 @@ export default class LastDiscussionView extends Component {
             let user = {
                 username: m.prop(tag.lastUser().username),
                 avatarUrl: tag.lastUser().avatarUrl != null ? m.prop(tag.lastUser().avatarUrl) : m.prop(),
-                color: computed('username', 'avatarUrl', 'avatarColor', function(username, avatarUrl, avatarColor) {
+                color: computed('username', 'avatarUrl', 'avatarColor', function (username, avatarUrl, avatarColor) {
                     if (avatarColor) {
-                      return 'rgb(' + avatarColor.join(', ') + ')';
+                        return 'rgb(' + avatarColor.join(', ') + ')';
                     } else if (avatarUrl) {
-                      this.calculateAvatarColor();
-                      return '';
+                        this.calculateAvatarColor();
+                        return '';
                     }
 
                     return '#' + stringToColor(username);
@@ -32,15 +32,15 @@ export default class LastDiscussionView extends Component {
 
             return (
                 <div className="TagChild-last">
-                    <div className="TagChild-avatar">{ avatar(user) } {' '}</div>
+                    <div className="TagChild-avatar">{avatar(user)} {' '}</div>
                     <div className="TagChild-post">
-                        <a href={ app.route.discussion(discussion, discussion.lastPostNumber()) } className="TagChild-discussion">{ discussion.title() }</a>
-                        { app.translator.trans('reflar-koseki.forum.by') }&nbsp;
+                        <a href={app.route.discussion(discussion, discussion.lastPostNumber())} className="TagChild-discussion">{discussion.title()}</a>
+                        {app.translator.trans('reflar-koseki.forum.by')}&nbsp;
 
-                        <a href={ app.route.user(user) } config={ m.route }>
-                            { username(user) }
-                         </a><br/>
-                        <small>{ humanTime(discussion.lastTime()) }</small>
+                        <a href={app.route.user(user)} config={m.route}>
+                            {username(user)}
+                        </a><br />
+                        <small>{humanTime(discussion.lastTime())}</small>
                     </div>
                 </div>
             );

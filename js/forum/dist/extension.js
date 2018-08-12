@@ -1,18 +1,12 @@
 'use strict';
 
-System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'flarum/helpers/avatar', 'flarum/helpers/username', 'flarum/helpers/humanTime', 'reflar/koseki/components/LastDiscussionView'], function (_export, _context) {
+System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'reflar/koseki/components/LastDiscussionView'], function (_export, _context) {
     "use strict";
 
-    var Component, avatar, username, humanTime, LastDiscussionView, ChildTagView;
+    var Component, LastDiscussionView, ChildTagView;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent.default;
-        }, function (_flarumHelpersAvatar) {
-            avatar = _flarumHelpersAvatar.default;
-        }, function (_flarumHelpersUsername) {
-            username = _flarumHelpersUsername.default;
-        }, function (_flarumHelpersHumanTime) {
-            humanTime = _flarumHelpersHumanTime.default;
         }, function (_reflarKosekiComponentsLastDiscussionView) {
             LastDiscussionView = _reflarKosekiComponentsLastDiscussionView.default;
         }],
@@ -41,7 +35,11 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'f
                             m(
                                 'div',
                                 { className: 'TagChild-meta' },
-                                m('div', { className: 'TagChild-image' }),
+                                tag.icon() ? m(
+                                    'div',
+                                    { className: 'TagChild-image' },
+                                    m('i', { 'class': tag.icon() })
+                                ) : '',
                                 m(
                                     'div',
                                     { className: 'TagChild-info' },
@@ -320,6 +318,7 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
                 Tag.prototype.commentsCount = Model.attribute('commentsCount');
                 Tag.prototype.lastUser = Model.attribute('lastUser');
                 Tag.prototype.hasChild = Model.attribute('hasChild');
+                Tag.prototype.icon = Model.attribute('icon');
             });
         }
     };

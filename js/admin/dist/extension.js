@@ -52,30 +52,35 @@ System.register('reflar/koseki/main', ['flarum/extend', 'flarum/Model', 'reflar/
                     this.icon = m.prop(this.tag.icon() || '');
                 });
 
+                var showInput = 0;
+
                 extend(EditTagModal.prototype, 'content', function (content) {
-                    var self = this;
+                    if (showInput == 0) {
+                        var self = this;
 
-                    // Add new input
-                    var newInput = document.createElement('div');
-                    newInput.classList += 'Form-group';
-                    newInput.innerHTML = '<label>Icon</label> <input class="FormControl" value="' + this.icon() + '">';
+                        // Add new input
+                        var newInput = document.createElement('div');
+                        newInput.classList += 'Form-group';
+                        newInput.innerHTML = '<label>Icon</label> <input class="FormControl" value="' + this.icon() + '">';
 
-                    // Update input value
-                    var formInput = newInput.querySelector('input');
-                    formInput.oninput = function () {
-                        self.icon = m.prop(formInput.value);
-                    };
+                        // Update input value
+                        var formInput = newInput.querySelector('input');
+                        formInput.oninput = function () {
+                            self.icon = m.prop(formInput.value);
+                        };
 
-                    if (this.element) {
-                        var formGroups = this.element.getElementsByClassName('Form-group');
-
-                        // Add input before input 4
-                        formGroups[4].before(newInput);
+                        if (this.element) {
+                            var formGroups = this.element.getElementsByClassName('Form-group');
+                            formGroups[4].before(newInput); // Add input before 4th form group
+                        }
+                    } else {
+                        showInput = 0; // Reset to 0 when new window is openend
                     }
                 });
 
                 extend(EditTagModal.prototype, 'submitData', function (data) {
                     data.icon = this.icon;
+                    showInput = 1; // Hide input when pressing submit
                 });
             });
         }
