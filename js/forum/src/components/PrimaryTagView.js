@@ -4,34 +4,34 @@ import ChildTagView from 'reflar/koseki/components/ChildTagView';
 
 export default class PrimaryTagView extends Component {
     init() {
-        console.log(app)
         super.init();
 
         this.tags = sortTags(app.store.all('tags').filter(tag => tag.parent() == this.props.tag));
     }
 
     toggleView() {
-        let parent = this.parentNode.parentNode.parentNode;
+        let parent = this.parentNode.parentNode.parentNode.parentNode.parentNode;
         let child = parent.querySelectorAll('.Category--Children')[0];
 
-        if (child.style.display == 'none') {
-            this.classList.remove('fa-angle-left');
-            this.classList.add('fa-angle-down');
+        if (child) {
+            if (child.style.display == 'none') {
+                this.classList.remove('fa-angle-left');
+                this.classList.add('fa-angle-down');
+            } else {
+                this.classList.remove('fa-angle-down');
+                this.classList.add('fa-angle-left');
+            }
 
-        } else {
-            this.classList.remove('fa-angle-down');
-            this.classList.add('fa-angle-left');
+            child.style.display = child.style.display == 'none' ? 'block' : 'none';
         }
-
-        child.style.display = child.style.display == 'none' ? 'block' : 'none';
     }
 
     view() {
         const tag = this.props.tag;
 
         return (
-            <div className="container">
-                <div className="Category TagTile">
+            <div class="container">
+                <div class="Category TagTile">
                     {tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? (
                         <div class="row">
                             <div class="row TagTile-info">
@@ -54,8 +54,9 @@ export default class PrimaryTagView extends Component {
                             {tag.description() != '' ? (<div class="col-xs-12"><p class="TagTile-description">{tag.description()}</p></div>) : ''}
                         </div>
                     ) : ''}
-
-                    {this.tags.map(tag => ChildTagView.component({ tag }))}
+                    <div class="Category--Children">
+                        {this.tags.map(tag => ChildTagView.component({ tag }))}
+                    </div>
                 </div>
             </div>
         );

@@ -225,7 +225,6 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                     value: function init() {
                         var _this2 = this;
 
-                        console.log(app);
                         babelHelpers.get(PrimaryTagView.prototype.__proto__ || Object.getPrototypeOf(PrimaryTagView.prototype), 'init', this).call(this);
 
                         this.tags = sortTags(app.store.all('tags').filter(function (tag) {
@@ -235,18 +234,20 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                 }, {
                     key: 'toggleView',
                     value: function toggleView() {
-                        var parent = this.parentNode.parentNode.parentNode;
+                        var parent = this.parentNode.parentNode.parentNode.parentNode.parentNode;
                         var child = parent.querySelectorAll('.Category--Children')[0];
 
-                        if (child.style.display == 'none') {
-                            this.classList.remove('fa-angle-left');
-                            this.classList.add('fa-angle-down');
-                        } else {
-                            this.classList.remove('fa-angle-down');
-                            this.classList.add('fa-angle-left');
-                        }
+                        if (child) {
+                            if (child.style.display == 'none') {
+                                this.classList.remove('fa-angle-left');
+                                this.classList.add('fa-angle-down');
+                            } else {
+                                this.classList.remove('fa-angle-down');
+                                this.classList.add('fa-angle-left');
+                            }
 
-                        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                            child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                        }
                     }
                 }, {
                     key: 'view',
@@ -255,10 +256,10 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
 
                         return m(
                             'div',
-                            { className: 'container' },
+                            { 'class': 'container' },
                             m(
                                 'div',
-                                { className: 'Category TagTile' },
+                                { 'class': 'Category TagTile' },
                                 tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
                                     'div',
                                     { 'class': 'row' },
@@ -321,9 +322,13 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                         )
                                     ) : ''
                                 ) : '',
-                                this.tags.map(function (tag) {
-                                    return ChildTagView.component({ tag: tag });
-                                })
+                                m(
+                                    'div',
+                                    { 'class': 'Category--Children' },
+                                    this.tags.map(function (tag) {
+                                        return ChildTagView.component({ tag: tag });
+                                    })
+                                )
                             )
                         );
                     }
