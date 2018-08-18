@@ -8,6 +8,7 @@ export default class ChildTagView extends Component {
 
     view() {
         const tag = this.props.tag;
+        const tagView = app.forum.attribute('kosekiTagsView');
 
         return (
             <div class="row TagChild-row">
@@ -22,12 +23,24 @@ export default class ChildTagView extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 col-lg-1">
-                    <span class="TagChild-topics">{tag.discussionsCount()}</span>
-                </div>
-                <div class="col-xs-2 col-lg-1">
-                    <span class="TagChild-posts">{tag.commentsCount()}</span>
-                </div>
+                {tagView == 'compact' ? (
+                    <div>
+                        <div class="col-xs-2 col-lg-2">
+                            <span className="TagChild-topics">{tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })}</span>
+                            <span className="TagChild-posts">{tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })}</span>
+                        </div>
+                    </div>) : (
+                        <div>
+                            <div class="col-xs-2 col-lg-1">
+                                <span class="TagChild-topics">{tag.discussionsCount()}</span>
+                            </div>
+                            <div class="col-xs-2 col-lg-1">
+                                <span class="TagChild-posts">{tag.commentsCount()}</span>
+                            </div>
+                        </div>
+                    )
+                }
+
                 <div class="visible-lg col-lg-2">
                     {LastDiscussionView.component({ tag })}
                 </div>

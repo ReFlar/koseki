@@ -28,6 +28,7 @@ export default class PrimaryTagView extends Component {
 
     view() {
         const tag = this.props.tag;
+        const tagView = app.forum.attribute('kosekiTagsView');
 
         return (
             <div class="container">
@@ -38,12 +39,22 @@ export default class PrimaryTagView extends Component {
                                 <div class="col-xs-8 col-lg-7">
                                     <a href={app.route('tag', { tags: tag.slug() })}>{tag.name()}</a>
                                 </div>
-                                <div class="col-xs-2 col-lg-1">
-                                    <span class="TagTile-topics">{app.translator.trans('reflar-koseki.forum.topics_title')}</span>
-                                </div>
-                                <div class="col-xs-2 col-lg-1">
-                                    <span class="TagTile-posts">{app.translator.trans('reflar-koseki.forum.posts_title')}</span>
-                                </div>
+                                {tagView == 'compact' ? (
+                                    <div>
+                                        <div class="col-xs-2 col-lg-2">
+                                            <span class="TagTile-posts">{app.translator.trans('reflar-koseki.forum.statistics')}</span>
+                                        </div>
+                                    </div>) : (
+                                        <div>
+                                            <div class="col-xs-2 col-lg-1">
+                                                <span class="TagTile-topics">{app.translator.trans('reflar-koseki.forum.topics_title')}</span>
+                                            </div>
+                                            <div class="col-xs-2 col-lg-1">
+                                                <span class="TagTile-posts">{app.translator.trans('reflar-koseki.forum.posts_title')}</span>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                                 <div class="col-xs-2 col-lg-2 visible-lg">
                                     <span class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</span>
                                 </div>

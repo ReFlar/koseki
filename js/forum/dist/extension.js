@@ -28,6 +28,7 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'r
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
+                        var tagView = app.forum.attribute('kosekiTagsView');
 
                         return m(
                             'div',
@@ -63,22 +64,43 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'r
                                     )
                                 )
                             ),
-                            m(
+                            tagView == 'compact' ? m(
                                 'div',
-                                { 'class': 'col-xs-2 col-lg-1' },
+                                null,
                                 m(
-                                    'span',
-                                    { 'class': 'TagChild-topics' },
-                                    tag.discussionsCount()
+                                    'div',
+                                    { 'class': 'col-xs-2 col-lg-2' },
+                                    m(
+                                        'span',
+                                        { className: 'TagChild-topics' },
+                                        tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })
+                                    ),
+                                    m(
+                                        'span',
+                                        { className: 'TagChild-posts' },
+                                        tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
+                                    )
                                 )
-                            ),
-                            m(
+                            ) : m(
                                 'div',
-                                { 'class': 'col-xs-2 col-lg-1' },
+                                null,
                                 m(
-                                    'span',
-                                    { 'class': 'TagChild-posts' },
-                                    tag.commentsCount()
+                                    'div',
+                                    { 'class': 'col-xs-2 col-lg-1' },
+                                    m(
+                                        'span',
+                                        { 'class': 'TagChild-topics' },
+                                        tag.discussionsCount()
+                                    )
+                                ),
+                                m(
+                                    'div',
+                                    { 'class': 'col-xs-2 col-lg-1' },
+                                    m(
+                                        'span',
+                                        { 'class': 'TagChild-posts' },
+                                        tag.commentsCount()
+                                    )
                                 )
                             ),
                             m(
@@ -253,6 +275,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                     key: 'view',
                     value: function view() {
                         var tag = this.props.tag;
+                        var tagView = app.forum.attribute('kosekiTagsView');
 
                         return m(
                             'div',
@@ -275,22 +298,38 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                                 tag.name()
                                             )
                                         ),
-                                        m(
+                                        tagView == 'compact' ? m(
                                             'div',
-                                            { 'class': 'col-xs-2 col-lg-1' },
+                                            null,
                                             m(
-                                                'span',
-                                                { 'class': 'TagTile-topics' },
-                                                app.translator.trans('reflar-koseki.forum.topics_title')
+                                                'div',
+                                                { 'class': 'col-xs-2 col-lg-2' },
+                                                m(
+                                                    'span',
+                                                    { 'class': 'TagTile-posts' },
+                                                    app.translator.trans('reflar-koseki.forum.statistics')
+                                                )
                                             )
-                                        ),
-                                        m(
+                                        ) : m(
                                             'div',
-                                            { 'class': 'col-xs-2 col-lg-1' },
+                                            null,
                                             m(
-                                                'span',
-                                                { 'class': 'TagTile-posts' },
-                                                app.translator.trans('reflar-koseki.forum.posts_title')
+                                                'div',
+                                                { 'class': 'col-xs-2 col-lg-1' },
+                                                m(
+                                                    'span',
+                                                    { 'class': 'TagTile-topics' },
+                                                    app.translator.trans('reflar-koseki.forum.topics_title')
+                                                )
+                                            ),
+                                            m(
+                                                'div',
+                                                { 'class': 'col-xs-2 col-lg-1' },
+                                                m(
+                                                    'span',
+                                                    { 'class': 'TagTile-posts' },
+                                                    app.translator.trans('reflar-koseki.forum.posts_title')
+                                                )
                                             )
                                         ),
                                         m(

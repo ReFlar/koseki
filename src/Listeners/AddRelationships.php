@@ -18,10 +18,20 @@ use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\PrepareApiAttributes;
 use Flarum\Tags\Api\Serializer\TagSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddRelationships
 {
+
+    protected $settings;
+
+    public function __construct(SettingsRepositoryInterface $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function subscribe(Dispatcher $events)
     {
         $events->listen(GetModelRelationship::class, [$this, 'getModelRelationship']);
@@ -71,6 +81,10 @@ class AddRelationships
                     'color' => isset($groups[0]) ? $groups[0]['color'] : '',
                 ];
             }
+        }
+
+        if ($event->isSerializer(ForumSerializer::class)) {
+            $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
         }
     }
 

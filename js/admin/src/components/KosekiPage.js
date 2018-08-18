@@ -7,7 +7,7 @@ export default class KosekiPage extends Page {
         super.init();
         this.loading = false;
 
-        this.tagsView = m.prop(app.data.settings['kosekiTagsView']);
+        this.tagsView = m.prop(app.data.settings['koseki.tags_view']);
     }
     view() {
         return (
@@ -57,7 +57,7 @@ export default class KosekiPage extends Page {
         this.loading = true;
 
         const settings = {
-            kosekiTagsView: this.tagsView()
+            'koseki.tags_view': this.tagsView()
         };
 
         saveSettings(settings)

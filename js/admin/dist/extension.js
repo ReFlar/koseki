@@ -89,7 +89,7 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                         babelHelpers.get(KosekiPage.prototype.__proto__ || Object.getPrototypeOf(KosekiPage.prototype), 'init', this).call(this);
                         this.loading = false;
 
-                        this.tagsView = m.prop(app.data.settings['kosekiTagsView']);
+                        this.tagsView = m.prop(app.data.settings['koseki.tags_view']);
                     }
                 }, {
                     key: 'view',
@@ -191,7 +191,7 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                         this.loading = true;
 
                         var settings = {
-                            kosekiTagsView: this.tagsView()
+                            'koseki.tags_view': this.tagsView()
                         };
 
                         saveSettings(settings).then(function () {
