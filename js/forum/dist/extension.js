@@ -350,20 +350,16 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                                 m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
                                             )
                                         )
-                                    ),
-                                    tag.description() != '' ? m(
-                                        'div',
-                                        { 'class': 'col-xs-12' },
-                                        m(
-                                            'p',
-                                            { 'class': 'TagTile-description' },
-                                            tag.description()
-                                        )
-                                    ) : ''
+                                    )
                                 ) : '',
                                 m(
                                     'div',
                                     { 'class': 'Category--Children' },
+                                    tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? m(
+                                        'p',
+                                        { 'class': 'TagTile-description' },
+                                        tag.description()
+                                    ) : '',
                                     this.tags.map(function (tag) {
                                         return ChildTagView.component({ tag: tag });
                                     })
@@ -457,22 +453,26 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                 }, {
                     key: 'toggleView',
                     value: function toggleView() {
-                        var parent = this.parentNode.parentNode.parentNode;
+                        var parent = this.parentNode.parentNode.parentNode.parentNode;
                         var child = parent.querySelectorAll('.Category--Children')[0];
 
-                        if (child.style.display == 'none') {
-                            this.classList.remove('fa-angle-left');
-                            this.classList.add('fa-angle-down');
-                        } else {
-                            this.classList.remove('fa-angle-down');
-                            this.classList.add('fa-angle-left');
-                        }
+                        if (child) {
+                            if (child.style.display == 'none') {
+                                this.classList.remove('fa-angle-left');
+                                this.classList.add('fa-angle-down');
+                            } else {
+                                this.classList.remove('fa-angle-down');
+                                this.classList.add('fa-angle-left');
+                            }
 
-                        child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                            child.style.display = child.style.display == 'none' ? 'block' : 'none';
+                        }
                     }
                 }, {
                     key: 'view',
                     value: function view() {
+                        var tagView = app.forum.attribute('kosekiTagsView');
+
                         return m(
                             'div',
                             { className: 'KosekiPage' },
@@ -497,7 +497,79 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                         { className: 'KosekiPage--categories TagTiles' },
                                         this.tags.map(function (tag) {
                                             return PrimaryTagView.component({ tag: tag });
-                                        })
+                                        }),
+                                        this.secondary.length >= 1 ? m(
+                                            'div',
+                                            { 'class': 'row' },
+                                            m(
+                                                'div',
+                                                { 'class': 'row TagTile-info' },
+                                                m(
+                                                    'div',
+                                                    { 'class': 'col-xs-8 col-lg-7' },
+                                                    app.translator.trans('reflar-koseki.forum.forums')
+                                                ),
+                                                tagView == 'compact' ? m(
+                                                    'div',
+                                                    null,
+                                                    m(
+                                                        'div',
+                                                        { 'class': 'col-xs-2 col-lg-2' },
+                                                        m(
+                                                            'span',
+                                                            { 'class': 'TagTile-posts' },
+                                                            app.translator.trans('reflar-koseki.forum.statistics')
+                                                        )
+                                                    )
+                                                ) : m(
+                                                    'div',
+                                                    null,
+                                                    m(
+                                                        'div',
+                                                        { 'class': 'col-xs-2 col-lg-1' },
+                                                        m(
+                                                            'span',
+                                                            { 'class': 'TagTile-topics' },
+                                                            app.translator.trans('reflar-koseki.forum.topics_title')
+                                                        )
+                                                    ),
+                                                    m(
+                                                        'div',
+                                                        { 'class': 'col-xs-2 col-lg-1' },
+                                                        m(
+                                                            'span',
+                                                            { 'class': 'TagTile-posts' },
+                                                            app.translator.trans('reflar-koseki.forum.posts_title')
+                                                        )
+                                                    )
+                                                ),
+                                                m(
+                                                    'div',
+                                                    { 'class': 'col-xs-2 col-lg-2 visible-lg' },
+                                                    m(
+                                                        'span',
+                                                        { 'class': 'TagTile-last' },
+                                                        app.translator.trans('reflar-koseki.forum.last_post')
+                                                    )
+                                                ),
+                                                m(
+                                                    'div',
+                                                    { 'class': 'visible-lg col-lg-1' },
+                                                    m(
+                                                        'div',
+                                                        { 'class': 'TagTile-toggle' },
+                                                        m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
+                                                    )
+                                                )
+                                            ),
+                                            m(
+                                                'div',
+                                                { 'class': 'Category--Children TagTile' },
+                                                this.secondary.map(function (tag) {
+                                                    return ChildTagView.component({ tag: tag });
+                                                })
+                                            )
+                                        ) : ''
                                     )
                                 )
                             )

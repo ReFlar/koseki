@@ -62,10 +62,10 @@ export default class PrimaryTagView extends Component {
                                     <div class="TagTile-toggle"><i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
                                 </div>
                             </div>
-                            {tag.description() != '' ? (<div class="col-xs-12"><p class="TagTile-description">{tag.description()}</p></div>) : ''}
                         </div>
                     ) : ''}
                     <div class="Category--Children">
+                        {tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? (<p class="TagTile-description">{tag.description()}</p>) : ''}
                         {this.tags.map(tag => ChildTagView.component({ tag }))}
                     </div>
                 </div>
