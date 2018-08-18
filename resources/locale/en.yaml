@@ -7,3 +7,5 @@ reflar-koseki:
         statistics: Statistics
         topics: topic|topics
         posts: post|posts
+        posts_title: Posts
+        topics_title: Topics

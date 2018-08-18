@@ -281,7 +281,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                             m(
                                                 'span',
                                                 { 'class': 'TagTile-topics' },
-                                                'Topics'
+                                                app.translator.trans('reflar-koseki.forum.topics_title')
                                             )
                                         ),
                                         m(
@@ -290,7 +290,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                                             m(
                                                 'span',
                                                 { 'class': 'TagTile-posts' },
-                                                'Posts'
+                                                app.translator.trans('reflar-koseki.forum.posts_title')
                                             )
                                         ),
                                         m(

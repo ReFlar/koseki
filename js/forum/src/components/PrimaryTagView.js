@@ -39,10 +39,10 @@ export default class PrimaryTagView extends Component {
                                     <a href={app.route('tag', { tags: tag.slug() })}>{tag.name()}</a>
                                 </div>
                                 <div class="col-xs-2 col-lg-1">
-                                    <span class="TagTile-topics">Topics</span>
+                                    <span class="TagTile-topics">{app.translator.trans('reflar-koseki.forum.topics_title')}</span>
                                 </div>
                                 <div class="col-xs-2 col-lg-1">
-                                    <span class="TagTile-posts">Posts</span>
+                                    <span class="TagTile-posts">{app.translator.trans('reflar-koseki.forum.posts_title')}</span>
                                 </div>
                                 <div class="col-xs-2 col-lg-2 visible-lg">
                                     <span class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</span>
