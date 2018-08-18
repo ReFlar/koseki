@@ -4,6 +4,7 @@ import ChildTagView from 'reflar/koseki/components/ChildTagView';
 
 export default class PrimaryTagView extends Component {
     init() {
+        console.log(app)
         super.init();
 
         this.tags = sortTags(app.store.all('tags').filter(tag => tag.parent() == this.props.tag));
@@ -29,17 +30,31 @@ export default class PrimaryTagView extends Component {
         const tag = this.props.tag;
 
         return (
-            <div className="Category TagTile">
-                {tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? (
-                    <div className="TagTile-info" style={tag.color() ? 'background: ' + tag.color() + ';' : ''}>
-                        <div class="TagTile-title"><a href={app.route('tag', { tags: tag.slug() })}>{tag.name()}</a></div>
-                        <div class="TagTile-stats">{app.translator.trans('reflar-koseki.forum.statistics')}</div>
-                        <div class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</div>
-                        <div class="TagTile-toggle"><i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
-                    </div>) : ''}
+            <div className="container">
+                <div className="Category TagTile">
+                    {tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? (
+                        <div class="row">
+                            <div class="row TagTile-info">
+                                <div class="col-xs-8 col-lg-7">
+                                    <a href={app.route('tag', { tags: tag.slug() })}>{tag.name()}</a>
+                                </div>
+                                <div class="col-xs-2 col-lg-1">
+                                    <span class="TagTile-topics">Topics</span>
+                                </div>
+                                <div class="col-xs-2 col-lg-1">
+                                    <span class="TagTile-posts">Posts</span>
+                                </div>
+                                <div class="col-xs-2 col-lg-2 visible-lg">
+                                    <span class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</span>
+                                </div>
+                                <div class="visible-lg col-lg-1">
+                                    <div class="TagTile-toggle"><i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
+                                </div>
+                            </div>
+                            {tag.description() != '' ? (<div class="col-xs-12"><p class="TagTile-description">{tag.description()}</p></div>) : ''}
+                        </div>
+                    ) : ''}
 
-                <div className="Category--Children TagTile-childview">
-                    {tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? (<div class="TagTile-description">{tag.description()}</div>) : ''}
                     {this.tags.map(tag => ChildTagView.component({ tag }))}
                 </div>
             </div>

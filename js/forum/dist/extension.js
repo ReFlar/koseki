@@ -31,45 +31,61 @@ System.register('reflar/koseki/components/ChildTagView', ['flarum/Component', 'r
 
                         return m(
                             'div',
-                            { className: 'TagChild' },
+                            { 'class': 'row TagChild-row' },
                             m(
                                 'div',
-                                { className: 'TagChild-meta' },
-                                tag.icon() ? m(
-                                    'div',
-                                    { className: 'TagChild-image' },
-                                    m('i', { 'class': tag.icon() })
-                                ) : '',
+                                { 'class': 'col-xs-8 col-lg-7' },
                                 m(
                                     'div',
-                                    { className: 'TagChild-info' },
+                                    { 'class': 'row' },
                                     m(
-                                        'a',
-                                        { href: app.route('tag', { tags: tag.slug() }), className: 'TagChild-title' },
-                                        tag.name()
+                                        'div',
+                                        { 'class': 'col-xs-2' },
+                                        tag.icon() ? m(
+                                            'div',
+                                            { className: 'TagChild-image' },
+                                            m('i', { 'class': tag.icon() + ' icon' })
+                                        ) : ''
                                     ),
                                     m(
-                                        'p',
-                                        null,
-                                        tag.description()
+                                        'div',
+                                        { 'class': 'col-xs-9' },
+                                        m(
+                                            'a',
+                                            { href: app.route('tag', { tags: tag.slug() }), className: 'TagChild-title' },
+                                            tag.name()
+                                        ),
+                                        m(
+                                            'p',
+                                            null,
+                                            tag.description()
+                                        )
                                     )
                                 )
                             ),
                             m(
                                 'div',
-                                { className: 'TagChild-stats' },
+                                { 'class': 'col-xs-2 col-lg-1' },
                                 m(
                                     'span',
-                                    { className: 'TagChild-topics' },
-                                    tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })
-                                ),
-                                m(
-                                    'span',
-                                    { className: 'TagChild-posts' },
-                                    tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })
+                                    { 'class': 'TagChild-topics' },
+                                    tag.discussionsCount()
                                 )
                             ),
-                            LastDiscussionView.component({ tag: tag })
+                            m(
+                                'div',
+                                { 'class': 'col-xs-2 col-lg-1' },
+                                m(
+                                    'span',
+                                    { 'class': 'TagChild-posts' },
+                                    tag.commentsCount()
+                                )
+                            ),
+                            m(
+                                'div',
+                                { 'class': 'visible-lg col-lg-2' },
+                                LastDiscussionView.component({ tag: tag })
+                            )
                         );
                     }
                 }]);
@@ -148,7 +164,7 @@ System.register('reflar/koseki/components/LastDiscussionView', ['flarum/Componen
                                 ),
                                 m(
                                     'div',
-                                    { className: 'TagChild-post' },
+                                    { className: 'TagChild-lastmeta' },
                                     m(
                                         'a',
                                         { href: app.route.discussion(discussion, discussion.lastPostNumber()), className: 'TagChild-discussion' },
@@ -209,6 +225,7 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
                     value: function init() {
                         var _this2 = this;
 
+                        console.log(app);
                         babelHelpers.get(PrimaryTagView.prototype.__proto__ || Object.getPrototypeOf(PrimaryTagView.prototype), 'init', this).call(this);
 
                         this.tags = sortTags(app.store.all('tags').filter(function (tag) {
@@ -238,42 +255,71 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
 
                         return m(
                             'div',
-                            { className: 'Category TagTile' },
-                            tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
-                                'div',
-                                { className: 'TagTile-info', style: tag.color() ? 'background: ' + tag.color() + ';' : '' },
-                                m(
-                                    'div',
-                                    { 'class': 'TagTile-title' },
-                                    m(
-                                        'a',
-                                        { href: app.route('tag', { tags: tag.slug() }) },
-                                        tag.name()
-                                    )
-                                ),
-                                m(
-                                    'div',
-                                    { 'class': 'TagTile-stats' },
-                                    app.translator.trans('reflar-koseki.forum.statistics')
-                                ),
-                                m(
-                                    'div',
-                                    { 'class': 'TagTile-last' },
-                                    app.translator.trans('reflar-koseki.forum.last_post')
-                                ),
-                                m(
-                                    'div',
-                                    { 'class': 'TagTile-toggle' },
-                                    m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
-                                )
-                            ) : '',
+                            { className: 'container' },
                             m(
                                 'div',
-                                { className: 'Category--Children TagTile-childview' },
-                                tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 && tag.description() != '' ? m(
+                                { className: 'Category TagTile' },
+                                tag.isPrimary() && tag.isChild() == false && this.tags.length >= 1 ? m(
                                     'div',
-                                    { 'class': 'TagTile-description' },
-                                    tag.description()
+                                    { 'class': 'row' },
+                                    m(
+                                        'div',
+                                        { 'class': 'row TagTile-info' },
+                                        m(
+                                            'div',
+                                            { 'class': 'col-xs-8 col-lg-7' },
+                                            m(
+                                                'a',
+                                                { href: app.route('tag', { tags: tag.slug() }) },
+                                                tag.name()
+                                            )
+                                        ),
+                                        m(
+                                            'div',
+                                            { 'class': 'col-xs-2 col-lg-1' },
+                                            m(
+                                                'span',
+                                                { 'class': 'TagTile-topics' },
+                                                'Topics'
+                                            )
+                                        ),
+                                        m(
+                                            'div',
+                                            { 'class': 'col-xs-2 col-lg-1' },
+                                            m(
+                                                'span',
+                                                { 'class': 'TagTile-posts' },
+                                                'Posts'
+                                            )
+                                        ),
+                                        m(
+                                            'div',
+                                            { 'class': 'col-xs-2 col-lg-2 visible-lg' },
+                                            m(
+                                                'span',
+                                                { 'class': 'TagTile-last' },
+                                                app.translator.trans('reflar-koseki.forum.last_post')
+                                            )
+                                        ),
+                                        m(
+                                            'div',
+                                            { 'class': 'visible-lg col-lg-1' },
+                                            m(
+                                                'div',
+                                                { 'class': 'TagTile-toggle' },
+                                                m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
+                                            )
+                                        )
+                                    ),
+                                    tag.description() != '' ? m(
+                                        'div',
+                                        { 'class': 'col-xs-12' },
+                                        m(
+                                            'p',
+                                            { 'class': 'TagTile-description' },
+                                            tag.description()
+                                        )
+                                    ) : ''
                                 ) : '',
                                 this.tags.map(function (tag) {
                                     return ChildTagView.component({ tag: tag });
@@ -407,42 +453,7 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                         { className: 'KosekiPage--categories TagTiles' },
                                         this.tags.map(function (tag) {
                                             return PrimaryTagView.component({ tag: tag });
-                                        }),
-                                        this.secondary.length >= 1 ? m(
-                                            'div',
-                                            { className: 'Category TagTile' },
-                                            m(
-                                                'div',
-                                                { className: 'TagTile-info' },
-                                                m(
-                                                    'div',
-                                                    { 'class': 'TagTile-title' },
-                                                    app.translator.trans('reflar-koseki.forum.forums')
-                                                ),
-                                                m(
-                                                    'div',
-                                                    { 'class': 'TagTile-stats' },
-                                                    app.translator.trans('reflar-koseki.forum.statistics')
-                                                ),
-                                                m(
-                                                    'div',
-                                                    { 'class': 'TagTile-last' },
-                                                    app.translator.trans('reflar-koseki.forum.last_post')
-                                                ),
-                                                m(
-                                                    'div',
-                                                    { 'class': 'TagTile-toggle' },
-                                                    m('i', { 'class': 'icon fa fa-angle-down', onclick: this.toggleView })
-                                                )
-                                            ),
-                                            m(
-                                                'div',
-                                                { className: 'Category--Children TagTile-childview' },
-                                                this.secondary.map(function (tag) {
-                                                    return ChildTagView.component({ tag: tag });
-                                                })
-                                            )
-                                        ) : ''
+                                        })
                                     )
                                 )
                             )

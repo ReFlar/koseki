@@ -33,7 +33,7 @@ export default class LastDiscussionView extends Component {
             return (
                 <div className="TagChild-last">
                     <div className="TagChild-avatar">{avatar(user)} {' '}</div>
-                    <div className="TagChild-post">
+                    <div className="TagChild-lastmeta">
                         <a href={app.route.discussion(discussion, discussion.lastPostNumber())} className="TagChild-discussion">{discussion.title()}</a>
                         {app.translator.trans('reflar-koseki.forum.by')}&nbsp;
 

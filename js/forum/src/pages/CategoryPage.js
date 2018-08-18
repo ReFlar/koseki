@@ -42,21 +42,6 @@ export default class CategoryPage extends Page {
                     <div className="KosekiPage-content">
                         <div className="KosekiPage--categories TagTiles">
                             {this.tags.map(tag => PrimaryTagView.component({ tag }))}
-
-                            {this.secondary.length >= 1 ? (
-                                <div className="Category TagTile">
-                                    <div className="TagTile-info">
-                                        <div class="TagTile-title">{app.translator.trans('reflar-koseki.forum.forums')}</div>
-                                        <div class="TagTile-stats">{app.translator.trans('reflar-koseki.forum.statistics')}</div>
-                                        <div class="TagTile-last">{app.translator.trans('reflar-koseki.forum.last_post')}</div>
-                                        <div class="TagTile-toggle"><i class="icon fa fa-angle-down" onclick={this.toggleView}></i></div>
-                                    </div>
-
-                                    <div className="Category--Children TagTile-childview">
-                                        {this.secondary.map(tag => ChildTagView.component({ tag }))}
-                                    </div>
-                                </div>
-                            ) : ''}
                         </div>
                     </div>
                 </div>

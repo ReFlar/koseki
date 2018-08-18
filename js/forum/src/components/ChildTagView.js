@@ -10,22 +10,27 @@ export default class ChildTagView extends Component {
         const tag = this.props.tag;
 
         return (
-            <div className="TagChild">
-                <div className="TagChild-meta">
-                    {tag.icon() ? <div className="TagChild-image"><i class={tag.icon()}></i></div>: ''}
-
-                    <div className="TagChild-info">
-                        <a href={app.route('tag', { tags: tag.slug() })} className="TagChild-title">{tag.name()}</a>
-                        <p>{tag.description()}</p>
+            <div class="row TagChild-row">
+                <div class="col-xs-8 col-lg-7">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            {tag.icon() ? (<div className="TagChild-image"><i class={tag.icon() + ' icon'}></i></div>) : ''}
+                        </div>
+                        <div class="col-xs-9">
+                            <a href={app.route('tag', { tags: tag.slug() })} className="TagChild-title">{tag.name()}</a>
+                            <p>{tag.description()}</p>
+                        </div>
                     </div>
                 </div>
-
-                <div className="TagChild-stats">
-                    <span className="TagChild-topics">{tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })}</span>
-                    <span className="TagChild-posts">{tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })}</span>
+                <div class="col-xs-2 col-lg-1">
+                    <span class="TagChild-topics">{tag.discussionsCount()}</span>
                 </div>
-
-                {LastDiscussionView.component({ tag })}
+                <div class="col-xs-2 col-lg-1">
+                    <span class="TagChild-posts">{tag.commentsCount()}</span>
+                </div>
+                <div class="visible-lg col-lg-2">
+                    {LastDiscussionView.component({ tag })}
+                </div>
             </div>
         );
     }

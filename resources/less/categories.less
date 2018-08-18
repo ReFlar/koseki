@@ -19,11 +19,18 @@
 }
 
 .KosekiPage {
+    .TagChild-row {
+        margin-top: 30px;
+    }
     .Category {
         background: transparent
     }
     .TagTile {
         background: transparent;
+    }
+    .TagTiles {
+        overflow: visible;
+        padding-left: 15px;
     }
     .TagTile-info {
         font-size: 11px;
@@ -38,28 +45,15 @@
     .TagTile-info:hover {
         background: rgba(106, 105, 105, 0.0784313725490196);
     }
-    .TagTile-title {
-        float: left;
-        width: 630px;
-    }
     .TagTile-title a {
         color: #aaa;
     }
-    .TagTile-stats {
-        float: left;
-        width: 140px;
-    }
     .TagTile-toggle {
-        float: right;
         text-align: right;
         cursor: pointer;
     }
     .TagTile-toggle i {
         font-size: 19px;
-    }
-    .TagTile-last {
-        float: left;
-        width: 80px;
     }
     .TagTile-name {
         font-size: 16px !important;
@@ -69,9 +63,17 @@
         text-decoration: none;
         clear: both;
     }
+    .TagTile-topics {
+        text-align: center;
+        display: block;
+    }
+    .TagTile-posts {
+        text-align: center;
+        display: block;
+    }
     .TagTile-description {
-        padding: 20px;
-        padding-bottom: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     .TagChild {
         clear: both;
@@ -81,16 +83,22 @@
     .TagChild-meta {
         display: inline-block;
         vertical-align: middle;
-        width: 665px;
         padding-right: 20px;
     }
-    .TagChild-stats {
-        width: 130px;
-        display: inline-block;
-        vertical-align: middle;
+    .TagChild-topics {
+        text-align: center;
+        display: block;
+    }
+    .TagChild-posts {
+        text-align: center;
+        display: block;
     }
     .TagChild-last {
-        width: 230px;
+        vertical-align: middle;
+        padding-left: 20px;
+        margin-top: -10px;
+    }
+    .TagChild-lastmeta {
         display: inline-block;
         vertical-align: middle;
     }
@@ -98,16 +106,11 @@
         font-weight: bold;
     }
     .TagChild-image {
-        width: 40px;
         height: 40px;
         text-align: center;
-        display: inline-block;
-        margin-left: 15px;
         font-size: 16px;
-        margin-right: 15px;
     }
     .TagChild-info {
-        width: 500px;
         vertical-align: middle;
         display: inline-block;
     }
@@ -134,10 +137,6 @@
         width: 40px;
         height: 40px;
         line-height: 39px;
-    }
-    .TagChild-topics,
-    .TagChild-posts {
-        display: block;
     }
     .Category--Children {
         font-weight: none !important;
@@ -176,40 +175,11 @@
 
 /* Mobile / Tablet */
 
-@media only screen and (min-width: 600px) and (max-width: 680px) {
-    .KosekiPage .TagTile-title {
-        width: 39%;
-    }
-    .KosekiPage .TagTile-stats {
-        width: 20%;
-    }
-    .KosekiPage .TagTile-last {
-        width: 30%;
-    }
-    .KosekiPage .TagChild-meta {
-        width: 40%;
-    }
-    .KosekiPage .TagChild-info {
-        width: 70%;
-        margin-left: 10px;
-    }
-}
+@media only screen and (min-width: 600px) and (max-width: 680px) {}
 
 @media only screen and (min-width: 700px) and (max-width: 1024px) {
     .IndexPage .IndexPage-toolbar-view {
         padding: 0;
-    }
-    .KosekiPage .TagTile-title {
-        width: 330px;
-    }
-    .KosekiPage .TagChild-meta {
-        width: 350px;
-    }
-    .KosekiPage .TagChild-stats {
-        width: 140px;
-    }
-    .KosekiPage .TagChild-info {
-        width: 200px;
     }
 }
 

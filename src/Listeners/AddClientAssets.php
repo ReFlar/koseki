@@ -37,6 +37,7 @@ class AddClientAssets
             $event->addAssets([
                 __DIR__.'/../../js/forum/dist/extension.js',
                 __DIR__.'/../../resources/less/categories.less',
+                __DIR__.'/../../resources/css/bootstrap.css',
             ]);
 
             $event->addBootstrapper('reflar/koseki/main');
@@ -45,6 +46,7 @@ class AddClientAssets
         if ($event->isAdmin()) {
             $event->addAssets([
                 __DIR__.'/../../js/admin/dist/extension.js',
+                __DIR__.'/../../resources/less/admin.less',
             ]);
 
             $event->addBootstrapper('reflar/koseki/main');
