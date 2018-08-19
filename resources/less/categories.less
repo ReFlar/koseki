@@ -1,21 +1,9 @@
-.IndexPage .item-nav {
-    display: none;
-}
-
 .IndexPage .DiscussionList {
     margin-top: 30px;
 }
 
-.IndexPage .sideNavOffset {
-    margin-left: 0;
-}
-
 .IndexPage .IndexPage-toolbar-view {
     padding-left: 20px;
-}
-
-.IndexPage-results .item-tags {
-    display: none;
 }
 
 .KosekiPage {
@@ -159,12 +147,20 @@
     .KosekiPage-nav .Dropdown-menu li {
         display: none;
     }
-    .KosekiPage-nav li.item-allDiscussions,
+
+    .KosekiPage-nav .open  li.item-allDiscussions,
+    .KosekiPage-nav .open li.item-following {
+        float: none;
+    }
+
+    .KosekiPage-nav  li.item-allDiscussions,
     .KosekiPage-nav li.item-following {
         display: block;
         float: left;
         padding-right: 20px;
-    } // Content
+    }
+
+    // Content
     .KosekiPage-content {
         width: 100%;
         clear: both;
