@@ -15,17 +15,17 @@ export default class StatisticsWidget extends Component {
         return (
             <div>
                 <div class="TagTile-info row">
-                    <div class="col-xs-8 col-lg-7">What's Going On?</div>
+                    <div class="col-xs-8 col-lg-7">{app.translator.trans('reflar-koseki.forum.whats_on')}</div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-3 col-lg-1"><i class="fa fa-bar-chart icon TagStatsIcon"></i></div>
                     <div class="col-xs-9 col-lg-10 TagTile">
                         <p class="TagTile-description">
-                            <h4>Forum statistics</h4>
+                            <h4>{app.translator.trans('reflar-koseki.forum.forum_stats')}</h4>
 
-                            Topics: <strong>{app.forum.attribute('discussionsCount')}</strong> /  &nbsp;Posts:  <strong>{app.forum.attribute('postsCount')}</strong> /  &nbsp;Members:  <strong>{app.forum.attribute('usersCount')}</strong><br></br>
-                            Welcome to our newest member: &nbsp;
+                            {app.translator.trans('reflar-koseki.forum.topics_title')}: <strong>{app.forum.attribute('discussionsCount')}</strong> /  &nbsp;{app.translator.trans('reflar-koseki.forum.posts_title')}:  <strong>{app.forum.attribute('postsCount')}</strong> /  &nbsp;{app.translator.trans('reflar-koseki.forum.members')}:  <strong>{app.forum.attribute('usersCount')}</strong><br></br>
+                            {app.translator.trans('reflar-koseki.forum.welcome_members')}: &nbsp;
                             <a href={app.route.user(user)} config={m.route}>
                                 <strong>{username(user)}</strong>
                             </a>

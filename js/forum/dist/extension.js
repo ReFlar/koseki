@@ -417,7 +417,7 @@ System.register('reflar/koseki/components/StatisticsWidget', ['flarum/Component'
                                 m(
                                     'div',
                                     { 'class': 'col-xs-8 col-lg-7' },
-                                    'What\'s Going On?'
+                                    app.translator.trans('reflar-koseki.forum.whats_on')
                                 )
                             ),
                             m(
@@ -437,28 +437,34 @@ System.register('reflar/koseki/components/StatisticsWidget', ['flarum/Component'
                                         m(
                                             'h4',
                                             null,
-                                            'Forum statistics'
+                                            app.translator.trans('reflar-koseki.forum.forum_stats')
                                         ),
-                                        'Topics: ',
+                                        app.translator.trans('reflar-koseki.forum.topics_title'),
+                                        ': ',
                                         m(
                                             'strong',
                                             null,
                                             app.forum.attribute('discussionsCount')
                                         ),
-                                        ' /  \xA0Posts:  ',
+                                        ' /  \xA0',
+                                        app.translator.trans('reflar-koseki.forum.posts_title'),
+                                        ':  ',
                                         m(
                                             'strong',
                                             null,
                                             app.forum.attribute('postsCount')
                                         ),
-                                        ' /  \xA0Members:  ',
+                                        ' /  \xA0',
+                                        app.translator.trans('reflar-koseki.forum.members'),
+                                        ':  ',
                                         m(
                                             'strong',
                                             null,
                                             app.forum.attribute('usersCount')
                                         ),
                                         m('br', null),
-                                        'Welcome to our newest member: \xA0',
+                                        app.translator.trans('reflar-koseki.forum.welcome_members'),
+                                        ': \xA0',
                                         m(
                                             'a',
                                             { href: app.route.user(user), config: m.route },
