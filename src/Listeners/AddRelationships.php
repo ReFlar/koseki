@@ -12,19 +12,18 @@
 
 namespace Reflar\Koseki\Listeners;
 
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Core\User;
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\PrepareApiAttributes;
-use Flarum\Tags\Api\Serializer\TagSerializer;
-use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Api\Serializer\TagSerializer;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddRelationships
 {
-
     protected $settings;
 
     public function __construct(SettingsRepositoryInterface $settings)
@@ -78,7 +77,7 @@ class AddRelationships
                 $event->attributes['lastUser'] = [
                     'username'  => $user->username,
                     'avatarUrl' => $user->avatarUrl,
-                    'color' => isset($groups[0]) ? $groups[0]['color'] : '',
+                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
                 ];
             }
         }

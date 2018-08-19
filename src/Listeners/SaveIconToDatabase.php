@@ -9,6 +9,7 @@
  * For the full copyright and license information, please view the license.md
  * file that was distributed with this source code.
  */
+
 namespace Reflar\Koseki\Listeners;
 
 use Flarum\Core\Access\AssertPermissionTrait;
