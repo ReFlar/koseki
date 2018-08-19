@@ -1,9 +1,10 @@
 import Page from 'flarum/components/Page';
-import PrimaryTagView from 'reflar/koseki/components/PrimaryTagView';
 import sortTags from 'flarum/tags/utils/sortTags';
 import IndexPage from 'flarum/components/IndexPage';
 import listItems from 'flarum/helpers/listItems';
+import PrimaryTagView from 'reflar/koseki/components/PrimaryTagView';
 import ChildTagView from 'reflar/koseki/components/ChildTagView';
+import StatisticsWidget from 'reflar/koseki/components/StatisticsWidget';
 
 export default class CategoryPage extends Page {
     init() {
@@ -82,6 +83,8 @@ export default class CategoryPage extends Page {
                                 </div>
                             ) : ''}
                         </div>
+
+                        {StatisticsWidget.component()}
                     </div>
                 </div>
             </div>

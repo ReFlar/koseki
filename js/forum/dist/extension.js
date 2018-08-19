@@ -377,6 +377,112 @@ System.register('reflar/koseki/components/PrimaryTagView', ['flarum/Component', 
 });;
 'use strict';
 
+System.register('reflar/koseki/components/StatisticsWidget', ['flarum/Component', 'flarum/helpers/username'], function (_export, _context) {
+    "use strict";
+
+    var Component, username, StatisticsWidget;
+    return {
+        setters: [function (_flarumComponent) {
+            Component = _flarumComponent.default;
+        }, function (_flarumHelpersUsername) {
+            username = _flarumHelpersUsername.default;
+        }],
+        execute: function () {
+            StatisticsWidget = function (_Component) {
+                babelHelpers.inherits(StatisticsWidget, _Component);
+
+                function StatisticsWidget() {
+                    babelHelpers.classCallCheck(this, StatisticsWidget);
+                    return babelHelpers.possibleConstructorReturn(this, (StatisticsWidget.__proto__ || Object.getPrototypeOf(StatisticsWidget)).apply(this, arguments));
+                }
+
+                babelHelpers.createClass(StatisticsWidget, [{
+                    key: 'init',
+                    value: function init() {
+                        babelHelpers.get(StatisticsWidget.prototype.__proto__ || Object.getPrototypeOf(StatisticsWidget.prototype), 'init', this).call(this);
+                    }
+                }, {
+                    key: 'view',
+                    value: function view() {
+                        var user = {
+                            username: m.prop(app.forum.attribute('lastUser'))
+                        };
+
+                        return m(
+                            'div',
+                            null,
+                            m(
+                                'div',
+                                { 'class': 'TagTile-info row' },
+                                m(
+                                    'div',
+                                    { 'class': 'col-xs-8 col-lg-7' },
+                                    'What\'s Going On?'
+                                )
+                            ),
+                            m(
+                                'div',
+                                { 'class': 'row' },
+                                m(
+                                    'div',
+                                    { 'class': 'col-xs-3 col-lg-1' },
+                                    m('i', { 'class': 'fa fa-bar-chart icon TagStatsIcon' })
+                                ),
+                                m(
+                                    'div',
+                                    { 'class': 'col-xs-9 col-lg-10 TagTile' },
+                                    m(
+                                        'p',
+                                        { 'class': 'TagTile-description' },
+                                        m(
+                                            'h4',
+                                            null,
+                                            'Forum statistics'
+                                        ),
+                                        'Topics: ',
+                                        m(
+                                            'strong',
+                                            null,
+                                            app.forum.attribute('discussionsCount')
+                                        ),
+                                        ' /  \xA0Posts:  ',
+                                        m(
+                                            'strong',
+                                            null,
+                                            app.forum.attribute('postsCount')
+                                        ),
+                                        ' /  \xA0Members:  ',
+                                        m(
+                                            'strong',
+                                            null,
+                                            app.forum.attribute('usersCount')
+                                        ),
+                                        m('br', null),
+                                        'Welcome to our newest member: \xA0',
+                                        m(
+                                            'a',
+                                            { href: app.route.user(user), config: m.route },
+                                            m(
+                                                'strong',
+                                                null,
+                                                username(user)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        );
+                    }
+                }]);
+                return StatisticsWidget;
+            }(Component);
+
+            _export('default', StatisticsWidget);
+        }
+    };
+});;
+'use strict';
+
 System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage', 'flarum/components/IndexPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
     "use strict";
 
@@ -411,23 +517,25 @@ System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/Cat
 });;
 'use strict';
 
-System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'reflar/koseki/components/PrimaryTagView', 'flarum/tags/utils/sortTags', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'reflar/koseki/components/ChildTagView'], function (_export, _context) {
+System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', 'flarum/tags/utils/sortTags', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'reflar/koseki/components/PrimaryTagView', 'reflar/koseki/components/ChildTagView', 'reflar/koseki/components/StatisticsWidget'], function (_export, _context) {
     "use strict";
 
-    var Page, PrimaryTagView, sortTags, IndexPage, listItems, ChildTagView, CategoryPage;
+    var Page, sortTags, IndexPage, listItems, PrimaryTagView, ChildTagView, StatisticsWidget, CategoryPage;
     return {
         setters: [function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
-        }, function (_reflarKosekiComponentsPrimaryTagView) {
-            PrimaryTagView = _reflarKosekiComponentsPrimaryTagView.default;
         }, function (_flarumTagsUtilsSortTags) {
             sortTags = _flarumTagsUtilsSortTags.default;
         }, function (_flarumComponentsIndexPage) {
             IndexPage = _flarumComponentsIndexPage.default;
         }, function (_flarumHelpersListItems) {
             listItems = _flarumHelpersListItems.default;
+        }, function (_reflarKosekiComponentsPrimaryTagView) {
+            PrimaryTagView = _reflarKosekiComponentsPrimaryTagView.default;
         }, function (_reflarKosekiComponentsChildTagView) {
             ChildTagView = _reflarKosekiComponentsChildTagView.default;
+        }, function (_reflarKosekiComponentsStatisticsWidget) {
+            StatisticsWidget = _reflarKosekiComponentsStatisticsWidget.default;
         }],
         execute: function () {
             CategoryPage = function (_Page) {
@@ -570,7 +678,8 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                                 })
                                             )
                                         ) : ''
-                                    )
+                                    ),
+                                    StatisticsWidget.component()
                                 )
                             )
                         );
