@@ -18,30 +18,18 @@ use Illuminate\Contracts\Events\Dispatcher;
 class SaveIconToDatabase
 {
     use AssertPermissionTrait;
-    /**
-     * @var AnswerValidator
-     */
-    protected $validator;
-    /**
-     * SavePollToDatabase constructor.
-     *
-     * @param AnswerValidator $validator
-     */
 
-    /**
-     * @param Dispatcher $events
-     */
+    protected $validator;
+
     public function subscribe(Dispatcher $events)
     {
         $events->listen(TagWillBeSaved::class, [$this, 'whenTagWillBeSaved']);
     }
-    /**
-     * @param TagWillBeSaved $event
-     *
-     * @throws \Flarum\Core\Exception\PermissionDeniedException
-     */
+
     public function whenTagWillBeSaved(TagWillBeSaved $event)
     {
-        $event->tag->icon = $event->data['attributes']['icon'];
+        if (isset($event->data['attributes']['icon'])) {
+            $event->tag->icon = $event->data['attributes']['icon'];
+        }
     }
 }
