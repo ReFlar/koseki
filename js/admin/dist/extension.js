@@ -156,7 +156,7 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                                         m(
                                             'div',
                                             { className: 'KosekiPage-viewBar' },
-                                            'Topics'
+                                            'Discussions'
                                         ),
                                         m(
                                             'div',

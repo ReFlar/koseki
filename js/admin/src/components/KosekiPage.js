@@ -21,6 +21,7 @@ export default class KosekiPage extends Page {
                 <div className="container">
                     <h3>Hierarchical grid layout</h3>
                     Choose a view grid which users will first see when they visit your forum.<br /><br />
+
                     <form onsubmit={this.onsubmit.bind(this)}>
                         <div class="Form-group">
                             <input type="radio" className="KosekiPage-radio" name="tagsView" value="compact" checked={this.tagsView() == 'compact' ? true : false} onclick={m.withAttr('value', this.tagsView)} /> Compact<br />
@@ -32,7 +33,7 @@ export default class KosekiPage extends Page {
                         <div class="Form-group">
                             <input type="radio" className="KosekiPage-radio" name="tagsView" value="default" checked={typeof this.tagsView() == 'undefined' || this.tagsView() == 'default' ? true : false} onclick={m.withAttr('value', this.tagsView)} /> Default<br />
                             <div className="KosekiPage-viewBar">Forum title</div>
-                            <div className="KosekiPage-viewBar">Topics</div>
+                            <div className="KosekiPage-viewBar">Discussions</div>
                             <div className="KosekiPage-viewBar">Posts</div>
                             <div className="KosekiPage-viewBar">Last post</div>
                         </div>
