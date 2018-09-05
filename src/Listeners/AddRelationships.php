@@ -12,18 +12,21 @@
 
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Core\User;
+use Flarum\Core\Post;
+use Flarum\Core\Discussion;
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\PrepareApiAttributes;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Serializer\TagSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddRelationships
 {
+
     protected $settings;
 
     public function __construct(SettingsRepositoryInterface $settings)
@@ -33,28 +36,8 @@ class AddRelationships
 
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(GetModelRelationship::class, [$this, 'getModelRelationship']);
-        $events->listen(GetApiRelationship::class, [$this, 'getApiRelationship']);
         $events->listen(ConfigureApiController::class, [$this, 'includeRelationship']);
         $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
-    }
-
-    /**
-     * @param GetModelRelationship $event
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function getModelRelationship(GetModelRelationship $event)
-    {
-    }
-
-    /**
-     * @param GetApiRelationship $event
-     *
-     * @return \Tobscure\JsonApi\Relationship
-     */
-    public function getApiRelationship(GetApiRelationship $event)
-    {
     }
 
     /**
@@ -77,12 +60,18 @@ class AddRelationships
                 $event->attributes['lastUser'] = [
                     'username'  => $user->username,
                     'avatarUrl' => $user->avatarUrl,
-                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
+                    'color' => isset($groups[0]) ? $groups[0]['color'] : '',
                 ];
             }
         }
 
         if ($event->isSerializer(ForumSerializer::class)) {
+            $lastUser = User::orderBy('join_time', 'DESC')->limit(1)->first();
+
+            $event->attributes['discussionsCount'] = Discussion::all()->count();
+            $event->attributes['postsCount'] = Post::all()->count();
+            $event->attributes['usersCount'] = User::all()->count();
+            $event->attributes['lastUser'] = $lastUser->username;
             $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
         }
     }
