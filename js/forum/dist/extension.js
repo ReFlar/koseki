@@ -489,17 +489,13 @@ System.register('reflar/koseki/components/StatisticsWidget', ['flarum/Component'
 });;
 'use strict';
 
-System.register('reflar/koseki/main', ['flarum/extend', 'reflar/koseki/pages/CategoryPage', 'flarum/components/IndexPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
+System.register('reflar/koseki/main', ['reflar/koseki/pages/CategoryPage', 'flarum/Model', 'flarum/tags/models/Tag'], function (_export, _context) {
     "use strict";
 
-    var extend, CategoryPage, IndexPage, Model, Tag;
+    var CategoryPage, Model, Tag;
     return {
-        setters: [function (_flarumExtend) {
-            extend = _flarumExtend.extend;
-        }, function (_reflarKosekiPagesCategoryPage) {
+        setters: [function (_reflarKosekiPagesCategoryPage) {
             CategoryPage = _reflarKosekiPagesCategoryPage.default;
-        }, function (_flarumComponentsIndexPage) {
-            IndexPage = _flarumComponentsIndexPage.default;
         }, function (_flarumModel) {
             Model = _flarumModel.default;
         }, function (_flarumTagsModelsTag) {
@@ -586,6 +582,9 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                     key: 'view',
                     value: function view() {
                         var tagView = app.forum.attribute('kosekiTagsView');
+                        var statisticsWidget = app.forum.attribute('kosekiStatistics');
+
+                        console.log(statisticsWidget);
 
                         return m(
                             'div',
@@ -685,7 +684,7 @@ System.register('reflar/koseki/pages/CategoryPage', ['flarum/components/Page', '
                                             )
                                         ) : ''
                                     ),
-                                    StatisticsWidget.component()
+                                    statisticsWidget == null || statisticsWidget == 0 ? StatisticsWidget.component() : ''
                                 )
                             )
                         );

@@ -62,15 +62,17 @@ System.register('reflar/koseki/addNavItem', ['flarum/extend', 'flarum/components
 });;
 'use strict';
 
-System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page', 'flarum/components/Button', 'flarum/utils/saveSettings'], function (_export, _context) {
+System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page', 'flarum/components/Button', 'flarum/components/Switch', 'flarum/utils/saveSettings'], function (_export, _context) {
     "use strict";
 
-    var Page, Button, saveSettings, KosekiPage;
+    var Page, Button, Switch, saveSettings, KosekiPage;
     return {
         setters: [function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
         }, function (_flarumComponentsButton) {
             Button = _flarumComponentsButton.default;
+        }, function (_flarumComponentsSwitch) {
+            Switch = _flarumComponentsSwitch.default;
         }, function (_flarumUtilsSaveSettings) {
             saveSettings = _flarumUtilsSaveSettings.default;
         }],
@@ -90,6 +92,7 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                         this.loading = false;
 
                         this.tagsView = m.prop(app.data.settings['koseki.tags_view']);
+                        this.statisticsWidget = m.prop(app.data.settings['koseki.statistics_widget']);
                     }
                 }, {
                     key: 'view',
@@ -169,6 +172,20 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                                             'Last post'
                                         )
                                     ),
+                                    m(
+                                        'h3',
+                                        null,
+                                        'Settings'
+                                    ),
+                                    m(
+                                        'div',
+                                        { 'class': 'Form-group' },
+                                        Switch.component({
+                                            state: this.statisticsWidget(),
+                                            children: 'Hide forum statistics',
+                                            onchange: this.statisticsWidget
+                                        })
+                                    ),
                                     Button.component({
                                         type: 'submit',
                                         className: 'Button Button--primary',
@@ -191,7 +208,8 @@ System.register('reflar/koseki/components/KosekiPage', ['flarum/components/Page'
                         this.loading = true;
 
                         var settings = {
-                            'koseki.tags_view': this.tagsView()
+                            'koseki.tags_view': this.tagsView(),
+                            'koseki.statistics_widget': this.statisticsWidget()
                         };
 
                         saveSettings(settings).then(function () {

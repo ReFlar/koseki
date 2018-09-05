@@ -69,6 +69,7 @@ class AddRelationships
             $event->attributes['usersCount'] = User::all()->count();
             $event->attributes['lastUser'] = $lastUser->username;
             $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
+            $event->attributes['kosekiStatistics'] = $this->settings->get('koseki.statistics_widget');
         }
     }
 }

@@ -33,6 +33,9 @@ export default class CategoryPage extends Page {
 
     view() {
         const tagView = app.forum.attribute('kosekiTagsView');
+        const statisticsWidget = app.forum.attribute('kosekiStatistics');
+
+        console.log(statisticsWidget)
 
         return (
             <div className="KosekiPage">
@@ -84,10 +87,11 @@ export default class CategoryPage extends Page {
                             ) : ''}
                         </div>
 
-                        {StatisticsWidget.component()}
+                        { statisticsWidget == null || statisticsWidget == 0 ?  StatisticsWidget.component() : '' }
                     </div>
                 </div>
             </div>
         );
+
     }
 }
