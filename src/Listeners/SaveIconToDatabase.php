@@ -12,14 +12,11 @@
 
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Tags\Event\TagWillBeSaved;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class SaveIconToDatabase
 {
-    use AssertPermissionTrait;
-
     protected $validator;
 
     public function subscribe(Dispatcher $events)
