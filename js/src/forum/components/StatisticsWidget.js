@@ -4,7 +4,6 @@ import username from 'flarum/helpers/username';
 export default class StatisticsWidget extends Component {
     init() {
         super.init();
-
     }
 
     view() {

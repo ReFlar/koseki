@@ -20,12 +20,12 @@
         },
         {
             "name": "Shahiem Seymor",
-            "email": "shahiem.seymor@reflar.email",
+            "email": "s.seymor@live.nl",
             "homepage": "https://shahiemseymor.com"
         }
     ],
     "require": {
-        "flarum/core": "^0.1.0-beta.7",
+        "flarum/core": "^0.1.0-beta.8",
         "flarum/flarum-ext-tags": "*"
     },
     "extra": {
