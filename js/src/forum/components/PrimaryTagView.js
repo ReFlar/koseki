@@ -1,6 +1,6 @@
 import Component from 'flarum/Component';
 import sortTags from 'flarum/tags/utils/sortTags';
-import ChildTagView from 'reflar/koseki/components/ChildTagView';
+import ChildTagView from '../components/ChildTagView';
 
 export default class PrimaryTagView extends Component {
     init() {

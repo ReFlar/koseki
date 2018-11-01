@@ -1,5 +1,5 @@
 import Component from 'flarum/Component';
-import LastDiscussionView from 'reflar/koseki/components/LastDiscussionView';
+import LastDiscussionView from '../components/LastDiscussionView';
 
 export default class ChildTagView extends Component {
     init() {

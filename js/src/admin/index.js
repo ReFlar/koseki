@@ -1,6 +1,6 @@
 import { extend } from 'flarum/extend';
 import Model from 'flarum/Model';
-import addHomepageOption from 'reflar/koseki/addHomepageOption';
+import addHomepageOption from './addHomepageOption';
 import EditTagModal from 'flarum/tags/components/EditTagModal';
 import Tag from 'flarum/tags/models/Tag';
 import addNavItem from './addNavItem';

@@ -1,5 +1,5 @@
 import { extend } from 'flarum/extend';
-import CategoryPage from 'reflar/koseki/pages/CategoryPage';
+import CategoryPage from './pages/CategoryPage';
 import IndexPage from 'flarum/components/IndexPage';
 import Model from 'flarum/Model';
 import Tag from 'flarum/tags/models/Tag';
