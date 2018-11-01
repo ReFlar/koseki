@@ -10,13 +10,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Reflar\Koseki;
+// namespace Reflar\Koseki;
 
-use Illuminate\Contracts\Events\Dispatcher;
+// use Illuminate\Contracts\Events\Dispatcher;
 
-return function (Dispatcher $events) {
-    $events->subscribe(Listeners\AddClientAssets::class);
-    $events->subscribe(Listeners\AddWebRoutes::class);
-    $events->subscribe(Listeners\AddRelationships::class);
-    $events->subscribe(Listeners\SaveIconToDatabase::class);
-};
+// return function (Dispatcher $events) {
+//     $events->subscribe(Listeners\AddClientAssets::class);
+//     $events->subscribe(Listeners\AddWebRoutes::class);
+//     $events->subscribe(Listeners\AddRelationships::class);
+//     $events->subscribe(Listeners\SaveIconToDatabase::class);
+// };
