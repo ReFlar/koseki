@@ -5,8 +5,8 @@ import saveSettings from 'flarum/utils/saveSettings';
 export default class KosekiPage extends Page {
     init() {
         super.init();
-        this.loading = false;
 
+        this.loading = false;
         this.tagsView = m.prop(app.data.settings['koseki.tags_view']);
     }
     view() {
@@ -52,15 +52,14 @@ export default class KosekiPage extends Page {
     onsubmit(e) {
         e.preventDefault();
 
-        if (this.loading) return;
+        if (this.loading)
+            return;
 
         this.loading = true;
 
-        const settings = {
+        saveSettings({
             'koseki.tags_view': this.tagsView()
-        };
-
-        saveSettings(settings)
+        })
             .then(() => {
                 this.loading = false;
                 m.redraw();
