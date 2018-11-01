@@ -21,5 +21,9 @@ return [
         ->route('/koseki', 'koseki'),
 
     function (Dispatcher $events) {
+        $events->subscribe(Listeners\AddClientAssets::class);
+        $events->subscribe(Listeners\AddWebRoutes::class);
+        $events->subscribe(Listeners\AddRelationships::class);
+        $events->subscribe(Listeners\SaveIconToDatabase::class);
     }
 ];
