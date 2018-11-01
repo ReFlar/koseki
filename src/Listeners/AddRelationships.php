@@ -15,9 +15,12 @@ namespace Reflar\Koseki\Listeners;
 use Flarum\Core\User;
 use Flarum\Core\Post;
 use Flarum\Core\Discussion;
+<<<<<<< HEAD
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
+=======
+>>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15
 use Flarum\Event\PrepareApiAttributes;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
@@ -36,7 +39,10 @@ class AddRelationships
 
     public function subscribe(Dispatcher $events)
     {
+<<<<<<< HEAD
         $events->listen(ConfigureApiController::class, [$this, 'includeRelationship']);
+=======
+>>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15
         $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
     }
 
@@ -73,13 +79,7 @@ class AddRelationships
             $event->attributes['usersCount'] = User::all()->count();
             $event->attributes['lastUser'] = $lastUser->username;
             $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
+            $event->attributes['kosekiStatistics'] = $this->settings->get('koseki.statistics_widget');
         }
-    }
-
-    /**
-     * @param ConfigureApiController $event
-     */
-    public function includeRelationship(ConfigureApiController $event)
-    {
     }
 }

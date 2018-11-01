@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 
@@ -13,5 +14,5 @@ return [
         $schema->table('tags', function (Blueprint $table) {
             $table->dropColumn('icon');
         });
-    }
+    },
 ];

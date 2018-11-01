@@ -1,4 +1,8 @@
+<<<<<<< HEAD:js/src/forum/index.js
 import CategoryPage from './pages/CategoryPage';
+=======
+import CategoryPage from 'reflar/koseki/pages/CategoryPage';
+>>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15:js/forum/src/main.js
 import Model from 'flarum/Model';
 import Tag from 'flarum/tags/models/Tag';
 

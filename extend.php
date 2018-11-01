@@ -17,12 +17,11 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 return [
     (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/forum/dist/extension.js')
+        ->js(__DIR__.'/js/dist/forum.js')
         ->route('/koseki', 'koseki'),
 
     function (Dispatcher $events) {
         $events->subscribe(Listeners\AddClientAssets::class);
-        $events->subscribe(Listeners\AddWebRoutes::class);
         $events->subscribe(Listeners\AddRelationships::class);
         $events->subscribe(Listeners\SaveIconToDatabase::class);
     }

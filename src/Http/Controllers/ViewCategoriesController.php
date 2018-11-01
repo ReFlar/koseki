@@ -9,11 +9,10 @@
  * For the full copyright and license information, please view the license.md
  * file that was distributed with this source code.
  */
+ namespace Reflar\Koseki\Http\Controllers;
 
-namespace Reflar\Koseki\Http\Controllers;
+ use Flarum\Forum\Controller\WebAppController;
 
-use Flarum\Forum\Controller\WebAppController;
-
-class ViewCategoriesController extends WebAppController
+ class ViewCategoriesController extends WebAppController
 {
 }
