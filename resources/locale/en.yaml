@@ -9,3 +9,7 @@ reflar-koseki:
         posts: post|posts
         posts_title: Posts
         topics_title: Topics
+        members: Members
+        welcome_members: Welcome to our newest member
+        forum_stats: Forum Statistics
+        whats_on: What's Going On?

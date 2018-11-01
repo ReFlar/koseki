@@ -11,7 +11,7 @@
  */
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Core\Access\AssertPermissionTrait;
+use Flarum\User\AssertPermissionTrait;
 use Flarum\Tags\Event\TagWillBeSaved;
 use Illuminate\Contracts\Events\Dispatcher;
 

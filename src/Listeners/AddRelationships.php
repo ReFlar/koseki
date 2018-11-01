@@ -13,6 +13,8 @@
 namespace Reflar\Koseki\Listeners;
 
 use Flarum\Core\User;
+use Flarum\Core\Post;
+use Flarum\Core\Discussion;
 use Flarum\Event\ConfigureApiController;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
@@ -34,28 +36,8 @@ class AddRelationships
 
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(GetModelRelationship::class, [$this, 'getModelRelationship']);
-        $events->listen(GetApiRelationship::class, [$this, 'getApiRelationship']);
         $events->listen(ConfigureApiController::class, [$this, 'includeRelationship']);
         $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
-    }
-
-    /**
-     * @param GetModelRelationship $event
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function getModelRelationship(GetModelRelationship $event)
-    {
-    }
-
-    /**
-     * @param GetApiRelationship $event
-     *
-     * @return \Tobscure\JsonApi\Relationship
-     */
-    public function getApiRelationship(GetApiRelationship $event)
-    {
     }
 
     /**
@@ -84,6 +66,12 @@ class AddRelationships
         }
 
         if ($event->isSerializer(ForumSerializer::class)) {
+            $lastUser = User::orderBy('join_time', 'DESC')->limit(1)->first();
+
+            $event->attributes['discussionsCount'] = Discussion::all()->count();
+            $event->attributes['postsCount'] = Post::all()->count();
+            $event->attributes['usersCount'] = User::all()->count();
+            $event->attributes['lastUser'] = $lastUser->username;
             $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
         }
     }
