@@ -35,8 +35,6 @@ export default class CategoryPage extends Page {
         const tagView = app.forum.attribute('kosekiTagsView');
         const statisticsWidget = app.forum.attribute('kosekiStatistics');
 
-        console.log(statisticsWidget)
-
         return (
             <div className="KosekiPage">
                 {IndexPage.prototype.hero()}

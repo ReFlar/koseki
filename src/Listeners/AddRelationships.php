@@ -12,16 +12,10 @@
 
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Core\User;
-use Flarum\Core\Post;
-use Flarum\Core\Discussion;
-<<<<<<< HEAD
-use Flarum\Event\ConfigureApiController;
-use Flarum\Event\GetApiRelationship;
-use Flarum\Event\GetModelRelationship;
-=======
->>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15
-use Flarum\Event\PrepareApiAttributes;
+use Flarum\User\User;
+use Flarum\Post\Post;
+use Flarum\Discussion\Discussion;
+use Flarum\Api\Event\Serializing;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -39,17 +33,13 @@ class AddRelationships
 
     public function subscribe(Dispatcher $events)
     {
-<<<<<<< HEAD
-        $events->listen(ConfigureApiController::class, [$this, 'includeRelationship']);
-=======
->>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15
-        $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
+        $events->listen(Serializing::class, [$this, 'prepareApiAttributes']);
     }
 
     /**
-     * @param PrepareApiAttributes $event
+     * @param Serializing $event
      */
-    public function prepareApiAttributes(PrepareApiAttributes $event)
+    public function prepareApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
             $lastDiscussion = $event->model->lastDiscussion;
@@ -72,7 +62,7 @@ class AddRelationships
         }
 
         if ($event->isSerializer(ForumSerializer::class)) {
-            $lastUser = User::orderBy('join_time', 'DESC')->limit(1)->first();
+            $lastUser = User::orderBy('joined_at', 'DESC')->limit(1)->first();
 
             $event->attributes['discussionsCount'] = Discussion::all()->count();
             $event->attributes['postsCount'] = Post::all()->count();

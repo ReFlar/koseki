@@ -69,18 +69,12 @@ export default class KosekiPage extends Page {
 
         this.loading = true;
 
-<<<<<<< HEAD:js/src/admin/components/KosekiPage.js
-        saveSettings({
-            'koseki.tags_view': this.tagsView()
-        })
-=======
         const settings = {
             'koseki.tags_view': this.tagsView(),
             'koseki.statistics_widget': this.statisticsWidget(),
         };
 
         saveSettings(settings)
->>>>>>> ee988f192e5e24aab7ad6c7c01843e5b689a4f15:js/admin/src/components/KosekiPage.js
             .then(() => {
                 this.loading = false;
                 m.redraw();

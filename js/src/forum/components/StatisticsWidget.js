@@ -8,6 +8,7 @@ export default class StatisticsWidget extends Component {
 
     view() {
         let user = {
+            displayName: m.prop(app.forum.attribute('lastUser')),
             username: m.prop(app.forum.attribute('lastUser')),
         };
 

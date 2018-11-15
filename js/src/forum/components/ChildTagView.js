@@ -14,7 +14,7 @@ export default class ChildTagView extends Component {
             <div class="row TagChild-row">
                 <div class="col-xs-8 col-lg-7">
                     <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-xs-2" style="bottom: 4px">
                             {tag.icon() ? (<div className="TagChild-image"><i class={tag.icon() + ' icon'}></i></div>) : ''}
                         </div>
                         <div class="col-xs-9">
@@ -26,13 +26,13 @@ export default class ChildTagView extends Component {
                 {tagView == 'compact' ? (
                     <div>
                         <div class="col-xs-2 col-lg-2">
-                            <span className="TagChild-topics">{tag.discussionsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })}</span>
+                            <span className="TagChild-topics">{tag.discussionCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.topics', tag.discussionsCount(), { count: tag.discussionsCount() })}</span>
                             <span className="TagChild-posts">{tag.commentsCount() + ' ' + app.translator.transChoice('reflar-koseki.forum.posts', tag.commentsCount() == 0 ? 0 : tag.commentsCount(), { count: tag.commentsCount() == 0 ? 0 : tag.commentsCount() })}</span>
                         </div>
                     </div>) : (
                         <div>
                             <div class="col-xs-2 col-lg-1">
-                                <span class="TagChild-topics">{tag.discussionsCount()}</span>
+                                <span class="TagChild-topics">{tag.discussionCount()}</span>
                             </div>
                             <div class="col-xs-2 col-lg-1">
                                 <span class="TagChild-posts">{tag.commentsCount()}</span>
