@@ -29,5 +29,5 @@ return [
     function (Dispatcher $events) {
         $events->subscribe(Listeners\AddRelationships::class);
         $events->subscribe(Listeners\SaveIconToDatabase::class);
-    }
+    },
 ];
