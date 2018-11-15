@@ -6,9 +6,6 @@
         "webpack": "^4.0.0",
         "webpack-cli": "^3.0.7"
     },
-    "options": {
-        "test": "hi"
-    },
     "scripts": {
         "build": "webpack --mode production",
         "watch": "webpack --mode development --watch"
