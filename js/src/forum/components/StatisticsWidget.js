@@ -4,11 +4,11 @@ import username from 'flarum/helpers/username';
 export default class StatisticsWidget extends Component {
     init() {
         super.init();
-
     }
 
     view() {
         let user = {
+            displayName: m.prop(app.forum.attribute('lastUser')),
             username: m.prop(app.forum.attribute('lastUser')),
         };
 

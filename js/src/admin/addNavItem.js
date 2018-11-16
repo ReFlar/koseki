@@ -1,7 +1,6 @@
 import { extend } from 'flarum/extend';
 import AdminNav from 'flarum/components/AdminNav';
 import AdminLinkButton from 'flarum/components/AdminLinkButton';
-
 import KosekiPage from './components/KosekiPage';
 
 export default function () {

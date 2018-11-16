@@ -12,7 +12,7 @@ export default class LastDiscussionView extends Component {
 
     view() {
         let tag = this.props.tag;
-        let discussion = tag.lastDiscussion();
+        let discussion = tag.lastPostedDiscussion();
 
         if (tag.lastUser() != null) {
             let user = {

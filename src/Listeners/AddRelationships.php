@@ -12,18 +12,17 @@
 
 namespace Reflar\Koseki\Listeners;
 
-use Flarum\Core\User;
-use Flarum\Core\Post;
-use Flarum\Core\Discussion;
-use Flarum\Event\PrepareApiAttributes;
-use Flarum\Tags\Api\Serializer\TagSerializer;
+use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Discussion\Discussion;
+use Flarum\Post\Post;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Api\Serializer\TagSerializer;
+use Flarum\User\User;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddRelationships
 {
-
     protected $settings;
 
     public function __construct(SettingsRepositoryInterface $settings)
@@ -33,13 +32,13 @@ class AddRelationships
 
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
+        $events->listen(Serializing::class, [$this, 'prepareApiAttributes']);
     }
 
     /**
-     * @param PrepareApiAttributes $event
+     * @param Serializing $event
      */
-    public function prepareApiAttributes(PrepareApiAttributes $event)
+    public function prepareApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
             $lastDiscussion = $event->model->lastDiscussion;
@@ -56,13 +55,13 @@ class AddRelationships
                 $event->attributes['lastUser'] = [
                     'username'  => $user->username,
                     'avatarUrl' => $user->avatarUrl,
-                    'color' => isset($groups[0]) ? $groups[0]['color'] : '',
+                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
                 ];
             }
         }
 
         if ($event->isSerializer(ForumSerializer::class)) {
-            $lastUser = User::orderBy('join_time', 'DESC')->limit(1)->first();
+            $lastUser = User::orderBy('joined_at', 'DESC')->limit(1)->first();
 
             $event->attributes['discussionsCount'] = Discussion::all()->count();
             $event->attributes['postsCount'] = Post::all()->count();

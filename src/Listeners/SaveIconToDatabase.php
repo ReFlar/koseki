@@ -17,8 +17,6 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class SaveIconToDatabase
 {
-    protected $validator;
-
     public function subscribe(Dispatcher $events)
     {
         $events->listen(TagWillBeSaved::class, [$this, 'whenTagWillBeSaved']);
