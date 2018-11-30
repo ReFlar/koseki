@@ -26,7 +26,7 @@
     ],
     "require": {
         "flarum/core": "^0.1.0-beta.8",
-        "flarum/flarum-ext-tags": "*"
+        "flarum/tags": "*"
     },
     "extra": {
         "flarum-extension": {
