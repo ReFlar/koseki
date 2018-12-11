@@ -45,4 +45,4 @@ app.initializers.add('reflar-koseki', app => {
         data.icon = this.icon;
         showInput = 1; // Hide input when pressing submit
     });
-});
+}, -50);

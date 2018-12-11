@@ -9,4 +9,4 @@ app.initializers.add('reflar-koseki', app => {
     Tag.prototype.lastUser = Model.attribute('lastUser');
     Tag.prototype.hasChild = Model.attribute('hasChild');
     Tag.prototype.icon = Model.attribute('icon');
-});
+}, -50);
