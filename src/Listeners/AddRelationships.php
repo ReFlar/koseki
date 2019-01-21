@@ -41,32 +41,31 @@ class AddRelationships
     public function prepareApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(TagSerializer::class)) {
-            $lastDiscussion = $event->model->lastDiscussion;
-            $user = isset($lastDiscussion->last_user_id) ? User::find($lastDiscussion->last_user_id) : null;
-
             $event->attributes['hasChild'] = $event->model->where('parent_id', $event->model->id)->count() >= 1 ? true : false;
-            $event->attributes['discussionsCount'] = count($event->model->discussions);
-            $event->attributes['commentsCount'] = max($event->model->discussions->max('comments_count') - 1, 0);
+            $event->attributes['discussionsCount'] = $event->model->discussions->count();
+            $event->attributes['commentsCount'] = $event->model->discussions->sum('comment_count') - $event->attributes['discussionsCount'];
             $event->attributes['icon'] = $event->model->icon;
 
-            if ($user) {
-                $groups = $user->groups()->get()->all();
-
-                $event->attributes['lastUser'] = [
-                    'username'  => $user->username,
-                    'avatarUrl' => $user->avatarUrl,
-                    'color'     => isset($groups[0]) ? $groups[0]['color'] : '',
-                ];
-            }
+//            $user = ($id = $event->model->last_posted_user_id) != null ? User::find($id) : null;
+//
+//            if ($user) {
+//                $group = $user->groups->first();
+//
+//                $event->attributes['lastUser'] = [
+//                    'username'  => $user->username,
+//                    'avatarUrl' => $user->avatarUrl,
+//                    'color'     => $group != null ? $group->color : '',
+//                ];
+//            }
         }
 
         if ($event->isSerializer(ForumSerializer::class)) {
             $lastUser = User::orderBy('joined_at', 'DESC')->limit(1)->first();
 
-            $event->attributes['discussionsCount'] = Discussion::all()->count();
-            $event->attributes['postsCount'] = Post::all()->count();
-            $event->attributes['usersCount'] = User::all()->count();
-            $event->attributes['lastUser'] = $lastUser->username;
+            $event->attributes['discussionsCount'] = Discussion::count();
+            $event->attributes['postsCount'] = Post::count();
+            $event->attributes['usersCount'] = User::count();
+            $event->attributes['lastUser'] = $lastUser != null ? $lastUser->username : null;
             $event->attributes['kosekiTagsView'] = $this->settings->get('koseki.tags_view');
             $event->attributes['kosekiStatistics'] = $this->settings->get('koseki.statistics_widget');
         }
